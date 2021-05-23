@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PhotoAlbum.DAL
+namespace PhotoAlbum.DAL.Entities
 {
     public class Photo
     {
