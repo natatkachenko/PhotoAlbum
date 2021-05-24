@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoAlbum.WEB", "PhotoAlbum.WEB\PhotoAlbum.WEB.csproj", "{67411550-2F08-4BF6-BFA3-85B81FBE26BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoAlbum.WEB", "PhotoAlbum.WEB\PhotoAlbum.WEB.csproj", "{67411550-2F08-4BF6-BFA3-85B81FBE26BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoAlbum.DAL", "PhotoAlbum.DAL\PhotoAlbum.DAL.csproj", "{624CD883-A0B3-4413-B34C-CC3F1AB0FC97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoAlbum.DAL", "PhotoAlbum.DAL\PhotoAlbum.DAL.csproj", "{624CD883-A0B3-4413-B34C-CC3F1AB0FC97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoAlbum.BLL", "PhotoAlbum.BLL\PhotoAlbum.BLL.csproj", "{04D3A8F4-D4D1-4BB6-AC90-A220DBC669FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{624CD883-A0B3-4413-B34C-CC3F1AB0FC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{624CD883-A0B3-4413-B34C-CC3F1AB0FC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{624CD883-A0B3-4413-B34C-CC3F1AB0FC97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D3A8F4-D4D1-4BB6-AC90-A220DBC669FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D3A8F4-D4D1-4BB6-AC90-A220DBC669FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D3A8F4-D4D1-4BB6-AC90-A220DBC669FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D3A8F4-D4D1-4BB6-AC90-A220DBC669FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
