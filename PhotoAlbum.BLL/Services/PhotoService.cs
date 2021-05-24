@@ -1,4 +1,6 @@
-﻿using PhotoAlbum.BLL.Interfaces;
+﻿using AutoMapper;
+using PhotoAlbum.BLL.DTO;
+using PhotoAlbum.BLL.Interfaces;
 using PhotoAlbum.DAL.Entities;
 using PhotoAlbum.DAL.Interfaces;
 using System;
@@ -8,33 +10,45 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.BLL.Services
 {
-    public class PhotoService : IService<Photo>
+    public class PhotoService : IService<PhotoDTO>
     {
         IUnitOfWork Database { get; set; }
+        readonly IMapper mapper;
 
-        public Task AddAsync(Photo entity)
+        public PhotoService(IUnitOfWork unitOfWork, IMapper map)
         {
-            throw new NotImplementedException();
+            Database = unitOfWork;
+            mapper = map;
+        }
+
+        public IEnumerable<PhotoDTO> GetAll()
+        {
+            return mapper.Map<IEnumerable<PhotoDTO>>(Database.PhotoRepository.GetAll());
+        }
+
+        public Task<PhotoDTO> GetByIdAsync(int id)
+        {
+            return Task.Run(() => mapper.Map<PhotoDTO>(Database.PhotoRepository.GetByIdAsync(id).Result));
+        }
+
+        public Task AddAsync(PhotoDTO entity)
+        {
+            Database.PhotoRepository.AddAsync(mapper.Map<Photo>(entity));
+            return Database.SaveAsync();
+        }
+
+        public Task UpdateAsync(PhotoDTO entity)
+        {
+            Database.PhotoRepository.Update(mapper.Map<Photo>(entity));
+            return Database.SaveAsync();
         }
 
         public Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
-        }
+            var photo = GetByIdAsync(id).Result;
+            photo.isDeleted = true;
 
-        public IEnumerable<Photo> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Photo> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Photo entity)
-        {
-            throw new NotImplementedException();
+            return UpdateAsync(photo);
         }
     }
 }

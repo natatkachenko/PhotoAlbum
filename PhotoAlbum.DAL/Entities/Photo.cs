@@ -11,5 +11,6 @@ namespace PhotoAlbum.DAL.Entities
         public int Rate { get; set; }
         public int GenreId { get; set; }
         public byte[] Data { get; set; }
+        public bool isDeleted { get; set; } = false;
     }
 }
