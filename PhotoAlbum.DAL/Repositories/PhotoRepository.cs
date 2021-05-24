@@ -28,7 +28,7 @@ namespace PhotoAlbum.DAL.Repositories
         {
             var photo = db.Photos.Find(id);
             if (photo != null)
-                db.Photos.Remove(photo);
+                photo.isDeleted = true;
         }
 
         public IQueryable<Photo> GetAll()

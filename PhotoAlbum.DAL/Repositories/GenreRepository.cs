@@ -28,7 +28,7 @@ namespace PhotoAlbum.DAL.Repositories
         {
             var genre = db.Genres.Find(id);
             if (genre != null)
-                db.Genres.Remove(genre);
+                genre.isDeleted = true;
         }
 
         public IQueryable<Genre> GetAll()
