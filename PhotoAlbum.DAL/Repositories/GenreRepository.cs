@@ -1,4 +1,5 @@
-﻿using PhotoAlbum.DAL.EFContext;
+﻿using Microsoft.EntityFrameworkCore;
+using PhotoAlbum.DAL.EFContext;
 using PhotoAlbum.DAL.Entities;
 using PhotoAlbum.DAL.Interfaces;
 using System;
