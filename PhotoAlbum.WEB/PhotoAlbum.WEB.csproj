@@ -8,5 +8,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PhotoAlbum.BLL\PhotoAlbum.BLL.csproj" />
+  </ItemGroup>
+
 
 </Project>
