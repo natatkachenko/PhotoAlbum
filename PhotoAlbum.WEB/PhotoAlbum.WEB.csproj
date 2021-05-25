@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PhotoAlbum.BLL\PhotoAlbum.BLL.csproj" />
+    <ProjectReference Include="..\PhotoAlbum.IoC\PhotoAlbum.IoC.csproj" />
   </ItemGroup>
 
 

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PhotoAlbum.IoC;
 
 namespace PhotoAlbum.WEB
 {
@@ -27,14 +28,9 @@ namespace PhotoAlbum.WEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = Configuration.GetConnectionString("Photo");
-            if (con.Contains("%CONTENTROOTPATH%"))
-            {
-                con = con.Replace("%CONTENTROOTPATH%", AppRootPath);
-            }
-
-            services.AddDbContext<PhotoContext>(options => options.UseSqlServer(con));
             services.AddControllers();
+            DependencyInjection dependencyInjection = new DependencyInjection(Configuration);
+            dependencyInjection.AddDependencies(services, AppRootPath);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
