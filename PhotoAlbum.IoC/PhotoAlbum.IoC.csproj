@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PhotoAlbum.BLL\PhotoAlbum.BLL.csproj" />
     <ProjectReference Include="..\PhotoAlbum.DAL\PhotoAlbum.DAL.csproj" />
   </ItemGroup>
 
