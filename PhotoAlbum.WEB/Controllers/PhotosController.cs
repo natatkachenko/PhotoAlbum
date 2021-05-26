@@ -10,34 +10,44 @@ namespace PhotoAlbum.WEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PhotoController : ControllerBase
+    public class PhotosController : ControllerBase
     {
         readonly IService<PhotoDTO> photoService;
 
-        public PhotoController(IService<PhotoDTO> service)
+        public PhotosController(IService<PhotoDTO> service)
         {
             photoService = service;
         }
 
-        // GET: api/photo
+        // GET: api/photos
         [HttpGet]
         public ActionResult<IEnumerable<PhotoDTO>> GetAll ()
         {
-            var books = photoService.GetAll();
-            return Ok(books);
+            var photos = photoService.GetAll();
+            return Ok(photos);
         }
 
-        // GET api/<PhotoController>/5
+        // GET api/photos/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<PhotoDTO>> GetById(int id)
         {
-            return "value";
+            var photo = await photoService.GetByIdAsync(id);
+            return Ok(photo);
         }
 
-        // POST api/<PhotoController>
+        // POST api/photos
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<PhotoDTO>> Add([FromBody] PhotoDTO model)
         {
+            try
+            {
+                await photoService.AddAsync(model);
+                return Ok(model);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         // PUT api/<PhotoController>/5
