@@ -21,34 +21,56 @@ namespace PhotoAlbum.WEB.Controllers
 
         // GET: api/genres
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<GenreDTO>> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var genres = genreService.GetAll();
+            return Ok(genres);
         }
 
-        // GET api/<GenresController>/5
+        // GET api/genres/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<GenreDTO>> GetById(int id)
         {
-            return "value";
+            var genre = await genreService.GetByIdAsync(id);
+            return Ok(genre);
         }
 
-        // POST api/<GenresController>
+        // POST api/genres
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<GenreDTO>> Add([FromBody] GenreDTO model)
         {
+            try
+            {
+                await genreService.AddAsync(model);
+                return Ok(model);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
-        // PUT api/<GenresController>/5
+        // PUT api/genres/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<GenreDTO>> Update(GenreDTO model)
         {
+            try
+            {
+                await genreService.UpdateAsync(model);
+                return Ok(model);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
-        // DELETE api/<GenresController>/5
+        // DELETE api/genres/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<PhotoDTO>> Delete(int id)
         {
+            await genreService.DeleteByIdAsync(id);
+            return Ok();
         }
     }
 }
