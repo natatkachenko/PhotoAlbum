@@ -45,6 +45,7 @@ namespace PhotoAlbum.WEB
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
