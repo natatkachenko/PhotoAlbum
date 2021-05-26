@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PhotoAlbum.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace PhotoAlbum.DAL.EFContext
 {
-    public class PhotoContext : DbContext
+    public class PhotoContext : IdentityDbContext<User>
     {
         public PhotoContext(DbContextOptions<PhotoContext> options) : base(options) { }
 
