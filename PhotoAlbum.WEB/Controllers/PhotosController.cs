@@ -50,16 +50,27 @@ namespace PhotoAlbum.WEB.Controllers
             }
         }
 
-        // PUT api/<PhotoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/photos
+        [HttpPut]
+        public async Task<ActionResult<PhotoDTO>> Update(PhotoDTO model)
         {
+            try
+            {
+                await photoService.UpdateAsync(model);
+                return Ok(model);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
-        // DELETE api/<PhotoController>/5
+        // DELETE api/photos/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<PhotoDTO>> Delete(int id)
         {
+            await photoService.DeleteByIdAsync(id);
+            return Ok();
         }
     }
 }
