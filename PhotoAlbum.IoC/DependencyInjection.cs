@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,6 +50,8 @@ namespace PhotoAlbum.IoC
             services.AddTransient<IRepository<Genre>, GenreRepository>();
             services.AddTransient<IService<PhotoDTO>, PhotoService>();
             services.AddTransient<IService<GenreDTO>, GenreService>();
+
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<PhotoContext>();
         }
     }
 }
