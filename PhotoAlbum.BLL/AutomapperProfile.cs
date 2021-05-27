@@ -13,6 +13,7 @@ namespace PhotoAlbum.BLL
         {
             CreateMap<Photo, PhotoDTO>().ReverseMap();
             CreateMap<Genre, GenreDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
         }
     }
 }
