@@ -20,12 +20,14 @@ namespace PhotoAlbum.DAL.Repositories
 
         public Task AddAsync(User entity)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => db.Users.Add(entity));
         }
 
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var user = db.Users.Find(id);
+            if (user != null)
+                user.isDeleted = true;
         }
 
         public IQueryable<User> GetAll()
