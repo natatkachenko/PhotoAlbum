@@ -1,4 +1,5 @@
-﻿using PhotoAlbum.DAL.EFContext;
+﻿using Microsoft.EntityFrameworkCore;
+using PhotoAlbum.DAL.EFContext;
 using PhotoAlbum.DAL.Entities;
 using PhotoAlbum.DAL.Interfaces;
 using System;
@@ -32,17 +33,17 @@ namespace PhotoAlbum.DAL.Repositories
 
         public IQueryable<User> GetAll()
         {
-            throw new NotImplementedException();
+            return db.Users;
         }
 
         public Task<User> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => db.Users.Find(id));
         }
 
         public void Update(User entity)
         {
-            throw new NotImplementedException();
+            db.Entry(entity).State = EntityState.Modified;
         }
     }
 }
