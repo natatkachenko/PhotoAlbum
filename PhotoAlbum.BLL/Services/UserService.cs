@@ -48,7 +48,7 @@ namespace PhotoAlbum.BLL.Services
 
         public bool isExist(UserDTO dto)
         {
-            throw new NotImplementedException();
+            return SignInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false).Result.Succeeded;
         }
 
         public Task UpdateAsync(UserDTO entity)
