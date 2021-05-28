@@ -44,17 +44,27 @@ namespace PhotoAlbum.BLL.Services
 
         public Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = GetByIdAsync(id).Result;
+
+            if (user is null)
+                throw new PhotoAlbumException($"The user with {nameof(id)} wasn't found!", nameof(id));
+
+            user.isDeleted = true;
+
+            return UpdateAsync(user);
         }
 
         public IEnumerable<UserDTO> GetAll()
         {
-            throw new NotImplementedException();
+            return mapper.Map<IEnumerable<UserDTO>>(Database.UserRepository.GetAll());
         }
 
         public Task<UserDTO> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id >= 1)
+                return Task.Run(() => mapper.Map<UserDTO>(Database.UserRepository.GetByIdAsync(id).Result));
+            else
+                throw new PhotoAlbumException($"{nameof(id)} cannot be less than or equal to 0!", nameof(id));
         }
 
         public bool isExist(UserDTO dto)
@@ -64,7 +74,8 @@ namespace PhotoAlbum.BLL.Services
 
         public Task UpdateAsync(UserDTO entity)
         {
-            throw new NotImplementedException();
+            Database.UserRepository.Update(mapper.Map<User>(entity));
+            return Database.SaveAsync();
         }
     }
 }
