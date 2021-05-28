@@ -10,6 +10,7 @@ namespace PhotoAlbum.DAL.Interfaces
     {
         IRepository<Photo> PhotoRepository { get; }
         IRepository<Genre> GenreRepository { get; }
+        IRepository<User> UserRepository { get; }
 
         Task<int> SaveAsync();
     }
