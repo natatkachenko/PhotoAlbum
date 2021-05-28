@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,7 +13,7 @@ namespace PhotoAlbum.BLL.DTO
         public DateTime Date { get; set; }
         public int Rate { get; set; }
         public int GenreId { get; set; }
-        public byte[] Data { get; set; }
+        public IFormFile Data { get; set; }
         public bool isDeleted { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using PhotoAlbum.DAL.Entities;
 using PhotoAlbum.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +40,16 @@ namespace PhotoAlbum.BLL.Services
         {
             ThrowPhotoAlbumException(entity);
 
-            Database.PhotoRepository.AddAsync(mapper.Map<Photo>(entity));
+            Photo photo = new Photo { Date = entity.Date, Description = entity.Description, GenreId = entity.GenreId };
+            byte[] imageData = null;
+
+            using(var binaryReader= new BinaryReader(entity.Data.OpenReadStream()))
+            {
+                imageData = binaryReader.ReadBytes((int)entity.Data.Length);
+            }
+            photo.Data = imageData;
+
+            Database.PhotoRepository.AddAsync(photo);
             return Database.SaveAsync();
         }
 
