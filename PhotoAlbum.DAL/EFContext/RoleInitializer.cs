@@ -10,17 +10,10 @@ namespace PhotoAlbum.DAL.EFContext
 {
     public class RoleInitializer
     {
-        readonly IConfiguration conf;
-
-        public RoleInitializer(IConfiguration configuration)
+        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            conf = configuration;
-        }
-
-        public async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
-        {
-            var userName = conf["Admin:UserName"];
-            var password = conf["Admin:Password"];
+            var userName = "admin";
+            var password = "1234";
 
             if (await roleManager.FindByNameAsync("Administrator") is null)
             {
