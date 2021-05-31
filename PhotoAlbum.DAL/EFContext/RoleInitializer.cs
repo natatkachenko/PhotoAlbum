@@ -10,26 +10,26 @@ namespace PhotoAlbum.DAL.EFContext
 {
     public class RoleInitializer
     {
-        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public static void Initialize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
-            var userName = "admin";
-            var password = "1234";
+            var userName = configuration["Admin:UserName"];
+            var password = configuration["Admin:Password"];
 
-            if (await roleManager.FindByNameAsync("Administrator") is null)
+            if (roleManager.FindByNameAsync("Administrator") is null)
             {
-                await roleManager.CreateAsync(new IdentityRole("Administrator"));
+                roleManager.CreateAsync(new IdentityRole("Administrator"));
                 
             }
-            if(await roleManager.FindByNameAsync("RegisteredUser") is null)
+            if(roleManager.FindByNameAsync("RegisteredUser") is null)
             {
-                await roleManager.CreateAsync(new IdentityRole("RegisteredUser"));
+                roleManager.CreateAsync(new IdentityRole("RegisteredUser"));
             }
-            if(await userManager.FindByNameAsync(userName) is null)
+            if(userManager.FindByNameAsync(userName) is null)
             {
                 User admin = new User { UserName = userName };
-                IdentityResult result = await userManager.CreateAsync(admin, password);
+                IdentityResult result = userManager.CreateAsync(admin, password).Result;
                 if (result.Succeeded)
-                    await userManager.AddToRoleAsync(admin, "Administrator");
+                    userManager.AddToRoleAsync(admin, "Administrator");
             }
         }
     }
