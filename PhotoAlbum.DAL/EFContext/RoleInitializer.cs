@@ -17,10 +17,10 @@ namespace PhotoAlbum.DAL.EFContext
             conf = configuration;
         }
 
-        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string userName = "admin";
-            string password = "1234";
+            var userName = conf["Admin:UserName"];
+            var password = conf["Admin:Password"];
 
             if (await roleManager.FindByNameAsync("Administrator") is null)
             {
@@ -33,7 +33,7 @@ namespace PhotoAlbum.DAL.EFContext
             }
             if(await userManager.FindByNameAsync(userName) is null)
             {
-                User admin = new User { UserName = userName, DateOfBirth = new DateTime(1992, 05, 10) };
+                User admin = new User { UserName = userName };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                     await userManager.AddToRoleAsync(admin, "Administrator");
