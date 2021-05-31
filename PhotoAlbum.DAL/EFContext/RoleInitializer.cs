@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using PhotoAlbum.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,13 @@ namespace PhotoAlbum.DAL.EFContext
 {
     public class RoleInitializer
     {
+        readonly IConfiguration conf;
+
+        public RoleInitializer(IConfiguration configuration)
+        {
+            conf = configuration;
+        }
+
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             string userName = "admin";
