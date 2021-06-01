@@ -9,5 +9,7 @@ namespace PhotoAlbum.DAL.Entities
     {
         public DateTime DateOfBirth { get; set; }
         public bool isDeleted { get; set; } = false;
+
+        public ICollection<Photo> Photos { get; set; }
     }
 }
