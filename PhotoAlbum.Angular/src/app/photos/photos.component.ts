@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Photo } from '../models/photo';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-photos',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./photos.component.css']
 })
 export class PhotosComponent implements OnInit {
+  public photos: Photo[];
 
-  constructor() { }
+  constructor(private http: HttpClient, private PhotoService: PhotoService) { }
 
   ngOnInit(): void {
+    this.PhotoService.getPhotos().subscribe(result => this.photos = result);
   }
 
 }
