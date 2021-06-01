@@ -7,7 +7,6 @@ namespace PhotoAlbum.DAL.Entities
     public class Photo
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string FileName { get; set; }
         public string Description { get; set; }
