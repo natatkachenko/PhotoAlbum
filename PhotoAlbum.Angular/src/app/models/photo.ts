@@ -1,9 +1,8 @@
 export interface Photo {
     id: number;
-    fileName: string;
-    description: string;
+    title: string;
     date: Date;
     rate: number;
-    data: File;
+    imagePath: string;
     isDeleted: boolean;
 }
