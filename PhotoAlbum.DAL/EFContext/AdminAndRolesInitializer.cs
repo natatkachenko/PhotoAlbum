@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using PhotoAlbum.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,28 +9,30 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.DAL.EFContext
 {
-    public class RoleInitializer
+    public class AdminAndRolesInitializer
     {
-        public static void Initialize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public static async Task InitializeAdminAndRoles(IServiceProvider provider, IConfiguration configuration)
         {
+            var userManager = provider.GetRequiredService<UserManager<User>>();
+            var roleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
             var userName = configuration["Admin:UserName"];
             var password = configuration["Admin:Password"];
 
             if (roleManager.FindByNameAsync("Administrator") is null)
             {
-                roleManager.CreateAsync(new IdentityRole("Administrator"));
+                await roleManager.CreateAsync(new IdentityRole("Administrator"));
                 
             }
             if(roleManager.FindByNameAsync("RegisteredUser") is null)
             {
-                roleManager.CreateAsync(new IdentityRole("RegisteredUser"));
+                await roleManager.CreateAsync(new IdentityRole("RegisteredUser"));
             }
             if(userManager.FindByNameAsync(userName) is null)
             {
                 User admin = new User { UserName = userName };
-                IdentityResult result = userManager.CreateAsync(admin, password).Result;
+                var result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
-                    userManager.AddToRoleAsync(admin, "Administrator");
+                    await userManager.AddToRoleAsync(admin, "Administrator");
             }
         }
     }
