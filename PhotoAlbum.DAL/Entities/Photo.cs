@@ -8,13 +8,12 @@ namespace PhotoAlbum.DAL.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string FileName { get; set; }
-        public string Description { get; set; }
+        [Required]
+        public string Title { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public int Rate { get; set; }
         public string UserId { get; set; }
-        [Required]
-        public byte[] Data { get; set; }
+        public string ImagePath { get; set; }
         public bool isDeleted { get; set; } = false;
 
         [ForeignKey("UserId")]
