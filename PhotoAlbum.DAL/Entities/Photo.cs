@@ -12,7 +12,6 @@ namespace PhotoAlbum.DAL.Entities
         public string Description { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public int Rate { get; set; }
-        public int GenreId { get; set; }
         public string UserId { get; set; }
         [Required]
         public byte[] Data { get; set; }

@@ -12,7 +12,6 @@ namespace PhotoAlbum.BLL
         public AutomapperProfile()
         {
             CreateMap<Photo, PhotoDTO>().ReverseMap();
-            CreateMap<Genre, GenreDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
         }
     }

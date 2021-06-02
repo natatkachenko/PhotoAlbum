@@ -47,9 +47,7 @@ namespace PhotoAlbum.IoC
             services.AddSingleton(mapper);
 
             services.AddTransient<IRepository<Photo>, PhotoRepository>();
-            services.AddTransient<IRepository<Genre>, GenreRepository>();
             services.AddTransient<IService<PhotoDTO>, PhotoService>();
-            services.AddTransient<IService<GenreDTO>, GenreService>();
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<PhotoContext>();
         }

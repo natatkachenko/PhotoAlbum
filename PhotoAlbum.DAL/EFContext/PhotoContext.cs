@@ -13,7 +13,6 @@ namespace PhotoAlbum.DAL.EFContext
         public PhotoContext(DbContextOptions<PhotoContext> options) : base(options) { }
 
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +22,6 @@ namespace PhotoAlbum.DAL.EFContext
                 FileName = "Forest.jpg",
                 Description = "Forest",
                 Date = new DateTime(2020, 05, 10),
-                GenreId = 1,
                 Rate = 0,
                 Data = File.ReadAllBytes("App_Data/Forest.jpg")
             });

@@ -12,7 +12,7 @@ namespace PhotoAlbum.DAL.Repositories
     {
         readonly PhotoContext db;
         private PhotoRepository photoRepository;
-        private GenreRepository genreRepository;
+        private UserRepository userRepository;
 
         public UnitOfWork(PhotoContext context)
         {
@@ -21,7 +21,7 @@ namespace PhotoAlbum.DAL.Repositories
 
         public IRepository<Photo> PhotoRepository => photoRepository = photoRepository ?? new PhotoRepository(db);
 
-        public IRepository<Genre> GenreRepository => genreRepository = genreRepository ?? new GenreRepository(db);
+        public IRepository<User> UserRepository => userRepository = userRepository ?? new UserRepository(db);
 
         public Task<int> SaveAsync()
         {
