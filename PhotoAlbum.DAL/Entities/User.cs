@@ -7,7 +7,6 @@ namespace PhotoAlbum.DAL.Entities
 {
     public class User : IdentityUser
     {
-        public DateTime DateOfBirth { get; set; }
         public bool isDeleted { get; set; } = false;
 
         public ICollection<Photo> Photos { get; set; }
