@@ -21,11 +21,10 @@ namespace PhotoAlbum.DAL.EFContext
             modelBuilder.Entity<Photo>().HasData(new Photo
             {
                 Id = 1,
-                FileName = "Forest.jpg",
-                Description = "Forest",
+                Title = "Forest",
                 Date = new DateTime(2020, 05, 10),
                 Rate = 0,
-                Data = File.ReadAllBytes("App_Data/Forest.jpg")
+                ImagePath = "App_Data/Forest.jpg"
             });
         }
     }
