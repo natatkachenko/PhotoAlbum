@@ -40,16 +40,16 @@ namespace PhotoAlbum.BLL.Services
         {
             ThrowPhotoAlbumException(entity);
 
-            Photo photo = new Photo { Date = entity.Date, Description = entity.Description, FileName = entity.FileName };
-            byte[] imageData = null;
+            //Photo photo = new Photo { Date = entity.Date, Description = entity.Description, FileName = entity.FileName, Data=entity. };
+            //byte[] imageData = null;
 
-            using(var binaryReader= new BinaryReader(entity.Data.OpenReadStream()))
-            {
-                imageData = binaryReader.ReadBytes((int)entity.Data.Length);
-            }
-            photo.Data = imageData;
+            //using(var binaryReader= new BinaryReader())
+            //{
+            //    imageData = binaryReader.ReadBytes((int)entity.Data.Length);
+            //}
+            //photo.Data = imageData;
 
-            Database.PhotoRepository.AddAsync(photo);
+            Database.PhotoRepository.AddAsync(mapper.Map<Photo>(entity));
             return Database.SaveAsync();
         }
 
