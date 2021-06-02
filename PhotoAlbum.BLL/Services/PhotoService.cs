@@ -40,15 +40,6 @@ namespace PhotoAlbum.BLL.Services
         {
             ThrowPhotoAlbumException(entity);
 
-            //Photo photo = new Photo { Date = entity.Date, Description = entity.Description, FileName = entity.FileName, Data=entity. };
-            //byte[] imageData = null;
-
-            //using(var binaryReader= new BinaryReader())
-            //{
-            //    imageData = binaryReader.ReadBytes((int)entity.Data.Length);
-            //}
-            //photo.Data = imageData;
-
             Database.PhotoRepository.AddAsync(mapper.Map<Photo>(entity));
             return Database.SaveAsync();
         }
@@ -75,12 +66,10 @@ namespace PhotoAlbum.BLL.Services
 
         private void ThrowPhotoAlbumException(PhotoDTO dto)
         {
-            if (String.IsNullOrEmpty(dto.Description))
-                throw new PhotoAlbumException($"{nameof(dto.Description)} cannot be null or empty!", nameof(dto.Description));
-            else if (String.IsNullOrEmpty(dto.FileName))
-                throw new PhotoAlbumException($"{nameof(dto.FileName)} cannot be null or empty!", nameof(dto.FileName));
-            else if(dto.Data is null)
-                throw new PhotoAlbumException($"{nameof(dto.Data)} cannot be null!", nameof(dto.Data));
+            if (String.IsNullOrEmpty(dto.Title))
+                throw new PhotoAlbumException($"{nameof(dto.Title)} cannot be null or empty!", nameof(dto.Title));
+            else if(dto.ImagePath is null)
+                throw new PhotoAlbumException($"{nameof(dto.ImagePath)} cannot be null!", nameof(dto.ImagePath));
         }
     }
 }
