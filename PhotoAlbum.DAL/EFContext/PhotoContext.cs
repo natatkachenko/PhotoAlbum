@@ -16,6 +16,8 @@ namespace PhotoAlbum.DAL.EFContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Photo>().HasData(new Photo
             {
                 Id = 1,
