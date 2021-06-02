@@ -18,16 +18,16 @@ namespace PhotoAlbum.DAL.EFContext
             var userName = configuration["Admin:UserName"];
             var password = configuration["Admin:Password"];
 
-            if (roleManager.FindByNameAsync("Administrator") is null)
+            if (await roleManager.FindByNameAsync("Administrator") is null)
             {
                 await roleManager.CreateAsync(new IdentityRole("Administrator"));
                 
             }
-            if(roleManager.FindByNameAsync("RegisteredUser") is null)
+            if(await roleManager.FindByNameAsync("RegisteredUser") is null)
             {
                 await roleManager.CreateAsync(new IdentityRole("RegisteredUser"));
             }
-            if(userManager.FindByNameAsync(userName) is null)
+            if(await userManager.FindByNameAsync(userName) is null)
             {
                 User admin = new User { UserName = userName };
                 var result = await userManager.CreateAsync(admin, password);

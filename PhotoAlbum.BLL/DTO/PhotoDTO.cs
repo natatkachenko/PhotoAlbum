@@ -12,7 +12,7 @@ namespace PhotoAlbum.BLL.DTO
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public int Rate { get; set; }
-        public int GenreId { get; set; }
+        public string UserId { get; set; }
         public IFormFile Data { get; set; }
         public bool isDeleted { get; set; }
     }

@@ -81,8 +81,6 @@ namespace PhotoAlbum.BLL.Services
                 throw new PhotoAlbumException($"{nameof(dto.FileName)} cannot be null or empty!", nameof(dto.FileName));
             else if(dto.Data is null)
                 throw new PhotoAlbumException($"{nameof(dto.Data)} cannot be null!", nameof(dto.Data));
-            else if (dto.GenreId <= 0)
-                throw new PhotoAlbumException($"{nameof(dto.GenreId)} cannot be less than or equal to 0!", nameof(dto.GenreId));
         }
     }
 }
