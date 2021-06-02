@@ -40,7 +40,7 @@ namespace PhotoAlbum.BLL.Services
         {
             ThrowPhotoAlbumException(entity);
 
-            Photo photo = new Photo { Date = entity.Date, Description = entity.Description, GenreId = entity.GenreId };
+            Photo photo = new Photo { Date = entity.Date, Description = entity.Description, FileName = entity.FileName };
             byte[] imageData = null;
 
             using(var binaryReader= new BinaryReader(entity.Data.OpenReadStream()))
