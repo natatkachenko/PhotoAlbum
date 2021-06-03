@@ -20,7 +20,6 @@
     "PhotoAlbum.WEB": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/photos",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
