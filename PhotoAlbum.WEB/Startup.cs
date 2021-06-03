@@ -45,6 +45,8 @@ namespace PhotoAlbum.WEB
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
             app.UseRouting();
             app.UseCors(options =>
             options.AllowAnyOrigin()

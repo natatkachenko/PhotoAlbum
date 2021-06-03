@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\Forest.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PhotoAlbum.BLL\PhotoAlbum.BLL.csproj" />
     <ProjectReference Include="..\PhotoAlbum.IoC\PhotoAlbum.IoC.csproj" />
   </ItemGroup>
