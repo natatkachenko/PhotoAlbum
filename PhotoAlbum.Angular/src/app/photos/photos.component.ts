@@ -11,7 +11,7 @@ import { PhotoService } from '../services/photo.service';
 export class PhotosComponent implements OnInit {
   public photos: Photo[];
 
-  constructor(private http: HttpClient, private PhotoService: PhotoService) { }
+  constructor(private PhotoService: PhotoService) { }
 
   ngOnInit(): void {
     this.PhotoService.getPhotos().subscribe(result => this.photos = result);

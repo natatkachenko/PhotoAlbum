@@ -1,5 +1,6 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { UploadService } from '../services/upload.service';
 
 @Component({
   selector: 'app-upload',
@@ -9,15 +10,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class UploadComponent implements OnInit {
   public progress: number;
   public message: string;
-  baseUrl = "https://localhost:44356/api/";
+  
   @Output() public uploadFinished = new EventEmitter();
 
-  constructor(private http: HttpClient) { }
+  constructor(private UploadService: UploadService) { }
 
   ngOnInit(): void {
   }
-
-  public uploadFile = (files: string | any[]) => {
+  
+  public uploadFile(files: string | any[]) {
     if(files.length == 0) {
       return;
     }
@@ -26,14 +27,13 @@ export class UploadComponent implements OnInit {
     var formData = new FormData();
     formData.append("file", fileToUpload, fileToUpload.name);
 
-    this.http.post(this.baseUrl + "upload", formData, {reportProgress: true, observe: "events"})
-      .subscribe(event => {
-        if(event.type == HttpEventType.UploadProgress)
-          this.progress = Math.round(100 * event.loaded / event.total);
-        else if(event.type == HttpEventType.Response) {
-          this.message = "Image has been uploaded!";
-          this.uploadFinished.emit(event.body);
-        }
-      });
+    this.UploadService.uploadFile(formData).subscribe(event => {
+      if(event.type == HttpEventType.UploadProgress)
+        this.progress = Math.round(100 * event.loaded / event.total);
+      else if(event.type == HttpEventType.Response) {
+        this.message = "Image has been uploaded!";
+        this.uploadFinished.emit(event.body);
+      }
+    });
   }
 }
