@@ -35,6 +35,7 @@ namespace PhotoAlbum.WEB
 
             services.AddCors();
 
+            //To avoid the MultiPartBodyLength error
             services.Configure<FormOptions>(options =>
             {
                 options.ValueLengthLimit = int.MaxValue;

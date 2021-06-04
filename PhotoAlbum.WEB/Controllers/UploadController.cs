@@ -21,11 +21,12 @@ namespace PhotoAlbum.WEB.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upload()
+        public async Task<IActionResult> Upload()
         {
             try
             {
-                var file = Request.Form.Files[0];
+                var formCollection = await Request.ReadFormAsync();
+                var file = formCollection.Files.First();
                 if (file.Length > 0)
                 {
                     var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "images");
