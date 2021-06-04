@@ -1,1 +1,10 @@
-<p>upload works!</p>
+<div class="row">
+    <div class="col-md-3">
+        <input type="file" (change)="uploadFile(file.files)">
+        <button type="button" (click)="file.click()">Upload image</button>
+    </div>
+    <div class="col-md-4">
+        <span class="upload" *ngIf="progress > 0">{{progress}}%</span>
+        <span class="upload" *ngIf="message">{{message}}</span>
+    </div>
+</div>

@@ -34,6 +34,6 @@ export class UploadComponent implements OnInit {
           this.message = "Image has been uploaded!";
           this.uploadFinished.emit(event.body);
         }
-      })
+      });
   }
 }
