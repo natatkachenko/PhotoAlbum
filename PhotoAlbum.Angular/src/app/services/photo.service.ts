@@ -13,11 +13,11 @@ export class PhotoService {
     this.baseUrl = baseUrl;
    }
 
-  getPhotos(): Observable<Photo[]> {
+  getPhotosDetails(): Observable<Photo[]> {
     return this.http.get<Photo[]>(this.baseUrl + "photos");
   }
 
-  addPhotoDetails(photo: Photo[]) {
+  postPhotoDetails(photo: Photo[]) {
     return this.http.post<void>(this.baseUrl + "photos", photo);
   }
 }

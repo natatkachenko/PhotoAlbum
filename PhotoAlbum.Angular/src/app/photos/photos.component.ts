@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Photo } from '../models/photo';
 import { PhotoService } from '../services/photo.service';
@@ -10,18 +9,27 @@ import { PhotoService } from '../services/photo.service';
 })
 export class PhotosComponent implements OnInit {
   public photos: Photo[];
+  public title: string;
+  public photo: Photo;
+  public isCreate: boolean;
 
   constructor(private photoService: PhotoService) { }
 
   ngOnInit(): void {
     this.getPhotosDetails();
+    this.isCreate = false;
   }
 
   getPhotosDetails() {
-    this.photoService.getPhotos().subscribe(result => this.photos = result);
+    this.photoService.getPhotosDetails().subscribe(result => this.photos = result);
   }
-  
+
   addPhotoDetails() {
-    this.photoService.addPhotoDetails(this.photos).subscribe(() => this.getPhotosDetails());
+    this.photoService.postPhotoDetails(this.photos).subscribe(() => this.getPhotosDetails());
+  }
+
+  goToCreate() {
+    this.isCreate = true;
+    this.title = "";
   }
 }

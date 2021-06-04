@@ -11,7 +11,7 @@ export class UploadService {
     this.baseUrl = baseUrl;
    }
 
-  uploadFile(formData: FormData) {
+  postFile(formData: FormData) {
     return this.http.post(this.baseUrl + "upload", formData, {reportProgress: true, observe: "events"});
   }
 }
