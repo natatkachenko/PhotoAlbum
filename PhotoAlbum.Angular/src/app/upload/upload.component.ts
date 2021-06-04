@@ -11,9 +11,9 @@ export class UploadComponent implements OnInit {
   public progress: number;
   public message: string;
   
-  @Output() public uploadFinished = new EventEmitter();
+  @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private UploadService: UploadService) { }
+  constructor(private uploadService: UploadService) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +27,7 @@ export class UploadComponent implements OnInit {
     var formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.UploadService.postFile(formData).subscribe(event => {
+    this.uploadService.postFile(formData).subscribe(event => {
       if(event.type == HttpEventType.UploadProgress){
         this.progress = event.total ? Math.round(100 * event.loaded / event.total) : 0;
         if(this.progress == 0)
@@ -35,7 +35,7 @@ export class UploadComponent implements OnInit {
       }
       else if(event.type == HttpEventType.Response) {
         this.message = "Image has been uploaded!";
-        this.uploadFinished.emit(event.body);
+        this.onUploadFinished.emit(event.body);
       }
     });
   }
