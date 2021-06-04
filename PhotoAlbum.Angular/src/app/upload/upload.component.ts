@@ -18,18 +18,21 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  public uploadFile(files: string | any[]) {
+  public uploadFile(files: any) {
     if(files.length == 0) {
       return;
     }
 
     var fileToUpload = <File>files[0];
     var formData = new FormData();
-    formData.append("file", fileToUpload, fileToUpload.name);
+    formData.append('file', fileToUpload, fileToUpload.name);
 
     this.UploadService.uploadFile(formData).subscribe(event => {
-      if(event.type == HttpEventType.UploadProgress)
-        this.progress = Math.round(100 * event.loaded / event.total);
+      if(event.type == HttpEventType.UploadProgress){
+        this.progress = event.total ? Math.round(100 * event.loaded / event.total) : 0;
+        if(this.progress == 0)
+          console.log(`${event.total} was undefined.`);
+      }
       else if(event.type == HttpEventType.Response) {
         this.message = "Image has been uploaded!";
         this.uploadFinished.emit(event.body);
