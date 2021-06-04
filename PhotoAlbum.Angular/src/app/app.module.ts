@@ -6,12 +6,14 @@ import { PhotosComponent } from './photos/photos.component';
 import { PhotosItemComponent } from './photos/photos-item/photos-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PhotosComponent,
-    PhotosItemComponent
+    PhotosItemComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
