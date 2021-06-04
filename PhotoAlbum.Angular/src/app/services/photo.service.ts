@@ -16,4 +16,8 @@ export class PhotoService {
   getPhotos(): Observable<Photo[]> {
     return this.http.get<Photo[]>(this.baseUrl + "photos");
   }
+
+  addPhoto(photo: Photo[]) {
+    return this.http.post<void>(this.baseUrl + "photos", photo);
+  }
 }
