@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Photo } from 'src/app/models/photo';
 
 @Component({
@@ -7,11 +7,17 @@ import { Photo } from 'src/app/models/photo';
   styleUrls: ['./photos-item.component.css']
 })
 export class PhotosItemComponent implements OnInit {
+  baseUrl: string;
   @Input() item: Photo;
   
-  constructor() { }
+  constructor(@Inject('BASE_URL') baseUrl: string) { 
+    this.baseUrl = baseUrl;
+  }
 
   ngOnInit(): void {
   }
 
+  createImagePath(path: string) {
+    return `${this.baseUrl + path}`;
+  }
 }
