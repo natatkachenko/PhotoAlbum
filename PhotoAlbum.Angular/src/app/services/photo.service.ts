@@ -17,7 +17,7 @@ export class PhotoService {
     return this.http.get<Photo[]>(this.baseUrl + "photos");
   }
 
-  postPhotoDetails(photo: Photo[]) {
-    return this.http.post<void>(this.baseUrl + "photos", photo);
+  postPhotoDetails(photo: Photo) {
+    return this.http.post<Photo>(this.baseUrl + "photos", photo);
   }
 }

@@ -1,4 +1,6 @@
+import { HttpEvent } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { title } from 'process';
 import { Photo } from '../models/photo';
 import { PhotoService } from '../services/photo.service';
 
@@ -12,6 +14,7 @@ export class PhotosComponent implements OnInit {
   public title: string;
   public photo: Photo;
   public isCreate: boolean;
+  public response: {dbPath: ''};
 
   constructor(private photoService: PhotoService) { }
 
@@ -25,11 +28,19 @@ export class PhotosComponent implements OnInit {
   }
 
   addPhotoDetails() {
-    this.photoService.postPhotoDetails(this.photos).subscribe(() => this.getPhotosDetails());
+    this.photo = {
+      title: this.title,
+      imagePath: this.response.dbPath
+    }
+    this.photoService.postPhotoDetails(this.photo).subscribe(() => this.getPhotosDetails());
   }
 
   goToCreate() {
     this.isCreate = true;
     this.title = "";
+  }
+
+  uploadFinished(event: any) {
+    this.response = event;
   }
 }
