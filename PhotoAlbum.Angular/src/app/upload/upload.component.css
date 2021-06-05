@@ -2,3 +2,7 @@
     font-weight: bold;
     color: mediumseagreen;
 }
+
+input{
+    display: none;
+}

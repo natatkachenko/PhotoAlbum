@@ -34,7 +34,7 @@ export class UploadComponent implements OnInit {
           console.log(`${event.total} was undefined.`);
       }
       else if(event.type == HttpEventType.Response) {
-        this.message = "Image has been uploaded!";
+        this.message = " Image has been uploaded!";
         this.onUploadFinished.emit(event.body);
       }
     });

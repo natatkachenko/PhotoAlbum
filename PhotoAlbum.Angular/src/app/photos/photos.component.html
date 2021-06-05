@@ -12,7 +12,7 @@
     </form>
 </div>
 
-<div>
+<div *ngIf="!isCreate">
     <div class="row">
         <button type="button" class="btn btn-primary" (click)="goToCreate()">Add photo</button>
     </div>
