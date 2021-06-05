@@ -10,7 +10,7 @@ namespace PhotoAlbum.DAL.Interfaces
     {
         IQueryable<T> GetAll();
         Task<T> GetByIdAsync(int id);
-        Task AddAsync(T entity);
+        void Add(T entity);
         void Update(T entity);
         void DeleteById(int id);
     }

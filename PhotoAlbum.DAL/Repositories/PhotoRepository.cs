@@ -19,10 +19,16 @@ namespace PhotoAlbum.DAL.Repositories
             db = context;
         }
 
-        public Task AddAsync(Photo entity)
+        public void Add(Photo entity)
         {
-            return Task.Run(() => db.Photos.Add(entity));
+            db.Photos.Add(entity);
         }
+
+        //public Task AddAsync(Photo entity)
+        //{
+        //    db.Photos.AddAsync(entity);
+        //    return new Task<bool>(() => { return true; });
+        //}
 
         public void DeleteById(int id)
         {

@@ -19,9 +19,9 @@ namespace PhotoAlbum.DAL.Repositories
             db = context;
         }
 
-        public Task AddAsync(User entity)
+        public void Add(User entity)
         {
-            return Task.Run(() => db.Users.Add(entity));
+            db.Add(entity);
         }
 
         public void DeleteById(int id)

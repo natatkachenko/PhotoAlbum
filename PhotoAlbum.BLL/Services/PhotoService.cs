@@ -40,7 +40,7 @@ namespace PhotoAlbum.BLL.Services
         {
             ThrowPhotoAlbumException(entity);
 
-            Database.PhotoRepository.AddAsync(mapper.Map<Photo>(entity));
+            (Database.PhotoRepository as DAL.Repositories.PhotoRepository).Add(mapper.Map<Photo>(entity));
             return Database.SaveAsync();
         }
 

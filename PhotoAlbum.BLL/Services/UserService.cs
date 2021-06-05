@@ -33,7 +33,7 @@ namespace PhotoAlbum.BLL.Services
             var result = UserManager.CreateAsync(mapper.Map<User>(entity), entity.Password).Result;
             if (result.Succeeded)
             {
-                Database.UserRepository.AddAsync(mapper.Map<User>(entity));
+                Database.UserRepository.Add(mapper.Map<User>(entity));
                 Database.SaveAsync();
                 var user = Database.UserRepository.GetAll().LastOrDefault();
                 return SignInManager.SignInAsync(user, false);
