@@ -2,6 +2,7 @@ import { HttpEvent } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { title } from 'process';
 import { Photo } from '../models/photo';
+import { PhotoToCreate } from '../models/photo-to-create';
 import { PhotoService } from '../services/photo.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { PhotoService } from '../services/photo.service';
 export class PhotosComponent implements OnInit {
   public photos: Photo[];
   public title: string;
-  public photo: Photo;
+  public photo: PhotoToCreate;
   public isCreate: boolean;
   public response: {dbPath: ''};
 

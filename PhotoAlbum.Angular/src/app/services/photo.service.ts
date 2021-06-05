@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Photo } from '../models/photo';
+import { PhotoToCreate } from '../models/photo-to-create';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class PhotoService {
     return this.http.get<Photo[]>(this.baseUrl + "photos");
   }
 
-  postPhotoDetails(photo: Photo) {
-    return this.http.post<Photo>(this.baseUrl + "photos", photo);
+  postPhotoDetails(photo: PhotoToCreate) {
+    return this.http.post(this.baseUrl + "photos", photo);
   }
 }
