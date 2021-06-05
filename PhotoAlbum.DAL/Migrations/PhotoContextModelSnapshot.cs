@@ -187,7 +187,7 @@ namespace PhotoAlbum.DAL.Migrations
                         {
                             Id = 1,
                             Date = new DateTime(2020, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImagePath = "App_Data/Forest.jpg",
+                            ImagePath = "images/Forest.jpg",
                             Rate = 0,
                             Title = "Forest",
                             isDeleted = false
