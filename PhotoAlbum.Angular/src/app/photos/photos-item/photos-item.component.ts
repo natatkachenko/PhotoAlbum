@@ -7,12 +7,10 @@ import { Photo } from 'src/app/models/photo';
   styleUrls: ['./photos-item.component.css']
 })
 export class PhotosItemComponent implements OnInit {
-  baseUrl: string;
+  baseUrl = "https://localhost:44356/";
   @Input() item: Photo;
   
-  constructor(@Inject('BASE_URL') baseUrl: string) { 
-    this.baseUrl = baseUrl;
-  }
+  constructor() {}
 
   ngOnInit(): void {
   }

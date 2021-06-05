@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 import { PhotosComponent } from './photos/photos.component';
 import { PhotosItemComponent } from './photos/photos-item/photos-item.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { UploadComponent } from './upload/upload.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { UploadComponent } from './upload/upload.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

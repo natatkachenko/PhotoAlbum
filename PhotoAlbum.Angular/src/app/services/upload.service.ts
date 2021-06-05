@@ -5,11 +5,9 @@ import { Inject, Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UploadService {
-  baseUrl: string;
+  baseUrl = "https://localhost:44356/api/";
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.baseUrl = baseUrl;
-   }
+  constructor(private http: HttpClient) {}
 
   postFile(formData: FormData) {
     return this.http.post(this.baseUrl + "upload", formData, {reportProgress: true, observe: "events"});

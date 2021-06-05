@@ -1,6 +1,4 @@
-import { HttpEvent } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { title } from 'process';
 import { Photo } from '../models/photo';
 import { PhotoToCreate } from '../models/photo-to-create';
 import { PhotoService } from '../services/photo.service';
