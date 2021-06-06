@@ -9,8 +9,8 @@ namespace PhotoAlbum.BLL.Interfaces
     {
         IEnumerable<T> GetAll();
         Task<T> GetByIdAsync(int id);
-        Task AddAsync(T entity);
-        Task UpdateAsync(T entity);
+        Task AddAsync(T dto);
+        Task UpdateAsync(T dto);
         Task DeleteByIdAsync(int id);
     }
 }

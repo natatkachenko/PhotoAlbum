@@ -28,12 +28,12 @@ namespace PhotoAlbum.BLL.Services
             SignInManager = signInManager;
         }
 
-        public Task AddAsync(UserDTO entity)
+        public Task AddAsync(UserDTO dto)
         {
-            var result = UserManager.CreateAsync(mapper.Map<User>(entity), entity.Password).Result;
+            var result = UserManager.CreateAsync(mapper.Map<User>(dto), dto.Password).Result;
             if (result.Succeeded)
             {
-                Database.UserRepository.Add(mapper.Map<User>(entity));
+                Database.UserRepository.Add(mapper.Map<User>(dto));
                 Database.SaveAsync();
                 var user = Database.UserRepository.GetAll().LastOrDefault();
                 return SignInManager.SignInAsync(user, false);
@@ -72,9 +72,9 @@ namespace PhotoAlbum.BLL.Services
             return SignInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false).Result.Succeeded;
         }
 
-        public Task UpdateAsync(UserDTO entity)
+        public Task UpdateAsync(UserDTO dto)
         {
-            Database.UserRepository.Update(mapper.Map<User>(entity));
+            Database.UserRepository.Update(mapper.Map<User>(dto));
             return Database.SaveAsync();
         }
     }

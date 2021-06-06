@@ -36,19 +36,19 @@ namespace PhotoAlbum.BLL.Services
                 throw new PhotoAlbumException($"{nameof(id)} cannot be less than or equal to 0!", nameof(id));
         }
 
-        public Task AddAsync(PhotoDTO entity)
+        public Task AddAsync(PhotoDTO dto)
         {
-            ThrowPhotoAlbumException(entity);
+            CheckDTOProperties(dto);
 
-            (Database.PhotoRepository as DAL.Repositories.PhotoRepository).Add(mapper.Map<Photo>(entity));
+            Database.PhotoRepository.Add(mapper.Map<Photo>(dto));
             return Database.SaveAsync();
         }
 
-        public Task UpdateAsync(PhotoDTO entity)
+        public Task UpdateAsync(PhotoDTO dto)
         {
-            ThrowPhotoAlbumException(entity);
+            CheckDTOProperties(dto);
 
-            Database.PhotoRepository.Update(mapper.Map<Photo>(entity));
+            Database.PhotoRepository.Update(mapper.Map<Photo>(dto));
             return Database.SaveAsync();
         }
 
@@ -64,11 +64,11 @@ namespace PhotoAlbum.BLL.Services
             return UpdateAsync(photo);
         }
 
-        private void ThrowPhotoAlbumException(PhotoDTO dto)
+        private void CheckDTOProperties(PhotoDTO dto)
         {
             if (String.IsNullOrEmpty(dto.Title))
                 throw new PhotoAlbumException($"{nameof(dto.Title)} cannot be null or empty!", nameof(dto.Title));
-            else if(dto.ImagePath is null)
+            if(dto.ImagePath is null)
                 throw new PhotoAlbumException($"{nameof(dto.ImagePath)} cannot be null!", nameof(dto.ImagePath));
         }
     }
