@@ -7,6 +7,7 @@ using PhotoAlbum.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +26,8 @@ namespace PhotoAlbum.BLL.Services
 
         public IEnumerable<PhotoDTO> GetAll()
         {
-            return mapper.Map<IEnumerable<PhotoDTO>>(Database.PhotoRepository.GetAll());
+            return mapper.Map<IEnumerable<PhotoDTO>>(Database.PhotoRepository.GetAll().ToList()
+                .Where(p => p.isDeleted == false));
         }
 
         public Task<PhotoDTO> GetByIdAsync(int id)

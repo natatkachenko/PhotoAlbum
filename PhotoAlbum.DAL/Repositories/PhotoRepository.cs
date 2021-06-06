@@ -24,12 +24,6 @@ namespace PhotoAlbum.DAL.Repositories
             db.Photos.Add(entity);
         }
 
-        //public Task AddAsync(Photo entity)
-        //{
-        //    db.Photos.AddAsync(entity);
-        //    return new Task<bool>(() => { return true; });
-        //}
-
         public void DeleteById(int id)
         {
             var photo = db.Photos.Find(id);
