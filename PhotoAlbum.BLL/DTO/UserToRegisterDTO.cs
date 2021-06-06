@@ -7,7 +7,6 @@ namespace PhotoAlbum.BLL.DTO
 {
     public class UserToRegisterDTO
     {
-        public int Id { get; set; }
         [Required]
         [Display(Name = "Login")]
         public string UserName { get; set; }
