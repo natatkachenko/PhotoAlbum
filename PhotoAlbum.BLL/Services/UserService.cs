@@ -28,7 +28,7 @@ namespace PhotoAlbum.BLL.Services
             SignInManager = signInManager;
         }
 
-        public Task AddAsync(UserDTO dto)
+        public Task AddAsync(RegisterUserDTO dto)
         {
             var result = UserManager.CreateAsync(mapper.Map<User>(dto), dto.Password).Result;
             if (result.Succeeded)
@@ -54,25 +54,25 @@ namespace PhotoAlbum.BLL.Services
             return UpdateAsync(user);
         }
 
-        public IEnumerable<UserDTO> GetAll()
+        public IEnumerable<RegisterUserDTO> GetAll()
         {
-            return mapper.Map<IEnumerable<UserDTO>>(Database.UserRepository.GetAll());
+            return mapper.Map<IEnumerable<RegisterUserDTO>>(Database.UserRepository.GetAll());
         }
 
-        public Task<UserDTO> GetByIdAsync(int id)
+        public Task<RegisterUserDTO> GetByIdAsync(int id)
         {
             if (id >= 1)
-                return Task.Run(() => mapper.Map<UserDTO>(Database.UserRepository.GetByIdAsync(id).Result));
+                return Task.Run(() => mapper.Map<RegisterUserDTO>(Database.UserRepository.GetByIdAsync(id).Result));
             else
                 throw new PhotoAlbumException($"{nameof(id)} cannot be less than or equal to 0!", nameof(id));
         }
 
-        public bool isExist(UserDTO dto)
+        public bool isExist(RegisterUserDTO dto)
         {
             return SignInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false).Result.Succeeded;
         }
 
-        public Task UpdateAsync(UserDTO dto)
+        public Task UpdateAsync(RegisterUserDTO dto)
         {
             Database.UserRepository.Update(mapper.Map<User>(dto));
             return Database.SaveAsync();

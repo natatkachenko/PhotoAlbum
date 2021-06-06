@@ -12,7 +12,7 @@ namespace PhotoAlbum.BLL
         public AutomapperProfile()
         {
             CreateMap<Photo, PhotoDTO>().ReverseMap();
-            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<User, RegisterUserDTO>().ReverseMap();
         }
     }
 }
