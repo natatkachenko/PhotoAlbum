@@ -20,7 +20,7 @@ namespace PhotoAlbum.WEB.Controllers
             userToRegisterService = service;
         }
 
-        [HttpPost]
+        [HttpPost("Registration")]
         public ActionResult RegisterUser([FromBody] UserToRegisterDTO userToRegisterDTO)
         {
             if (userToRegisterDTO == null || !ModelState.IsValid)
