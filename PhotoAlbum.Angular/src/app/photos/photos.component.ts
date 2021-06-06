@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Photo } from '../models/photo';
 import { PhotoToCreate } from '../models/photo-to-create';
+import { PhotoToUpdate } from '../models/photo-to-update';
 import { PhotoService } from '../services/photo.service';
 
 @Component({
@@ -11,8 +12,11 @@ import { PhotoService } from '../services/photo.service';
 export class PhotosComponent implements OnInit {
   public photos: Photo[];
   public title: string;
-  public photo: PhotoToCreate;
+  public photoToCreate: PhotoToCreate;
+  public photoToUpdate: PhotoToUpdate;
   public isCreate: boolean;
+  public isUpdate: boolean;
+  
   public response: {dbPath: ''};
 
   constructor(private photoService: PhotoService) { }
@@ -20,6 +24,7 @@ export class PhotosComponent implements OnInit {
   ngOnInit(): void {
     this.getPhotosDetails();
     this.isCreate = false;
+    this.isUpdate = false;
   }
 
   getPhotosDetails() {
@@ -27,12 +32,12 @@ export class PhotosComponent implements OnInit {
   }
 
   addPhotoDetails() {
-    this.photo = {
+    this.photoToCreate = {
       title: this.title,
       imagePath: this.response.dbPath
     }
-    this.photoService.postPhotoDetails(this.photo).subscribe(() => {
-      this.getPhotosDetails()
+    this.photoService.postPhotoDetails(this.photoToCreate).subscribe(() => {
+      this.getPhotosDetails();
       this.isCreate = false;
     });
   }
@@ -48,5 +53,28 @@ export class PhotosComponent implements OnInit {
 
   cancelAdd() {
     this.isCreate = false;
+  }
+
+  getPhotoDetailsByIndex(index: number) {
+    this.photoService.getPhotosDetailsById(index).subscribe(result=> {
+      this.photoToUpdate = result;
+      this.isUpdate = true;
+    });
+  }
+  
+  updatePhotoDetails() {
+    this.photoToUpdate = {
+      id: this.photoToUpdate.id,
+      title: this.title,
+      imagePath: this.photoToUpdate.imagePath
+    }
+    this.photoService.putPhotoDetails(this.photoToUpdate).subscribe(() =>{
+      this.getPhotosDetails();
+      this.isUpdate = false;
+    })
+  }
+
+  cancelUpdate() {
+    this.isUpdate = false;
   }
 }

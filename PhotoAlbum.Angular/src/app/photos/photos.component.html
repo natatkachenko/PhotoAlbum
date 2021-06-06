@@ -13,10 +13,24 @@
     </form>
 </div>
 
-<div *ngIf="!isCreate">
+<div *ngIf="isUpdate">
+    <h1>Edit title</h1>
+    <form>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required placeholder="Enter your title" [(ngModel)]="title">
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-primary" (click)="updatePhotoDetails()">Save</button>
+            <button type="button" (click)="cancelUpdate()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="!isCreate && !isUpdate">
     <div class="row">
         <button type="button" class="btn btn-primary" (click)="goToCreate()">Add photo</button>
     </div>
-    <app-photos-item *ngFor="let photo of photos" [item]="photo"></app-photos-item>
+    <app-photos-item *ngFor="let photo of photos; let i = index" [item]="photo" (update)="getPhotoDetailsByIndex(i)"></app-photos-item>
 </div>
 

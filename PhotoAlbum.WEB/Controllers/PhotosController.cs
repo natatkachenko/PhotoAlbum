@@ -41,8 +41,6 @@ namespace PhotoAlbum.WEB.Controllers
         {
             try
             {
-                if (String.IsNullOrEmpty(model.Title))
-                    ModelState.AddModelError("Title", "Title is required!");
                 if (ModelState.IsValid)
                 {
                     await photoService.AddAsync(model);
@@ -63,8 +61,13 @@ namespace PhotoAlbum.WEB.Controllers
         {
             try
             {
-                await photoService.UpdateAsync(model);
-                return Ok(model);
+                if (ModelState.IsValid)
+                {
+                    await photoService.UpdateAsync(model);
+                    return Ok(model);
+                }
+                else
+                    return BadRequest();
             }
             catch
             {

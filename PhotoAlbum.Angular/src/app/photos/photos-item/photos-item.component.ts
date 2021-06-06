@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Photo } from 'src/app/models/photo';
 
 @Component({
@@ -9,6 +9,7 @@ import { Photo } from 'src/app/models/photo';
 export class PhotosItemComponent implements OnInit {
   baseUrl = "https://localhost:44356/";
   @Input() item: Photo;
+  @Output() update = new EventEmitter();
   
   constructor() {}
 
@@ -17,5 +18,9 @@ export class PhotosItemComponent implements OnInit {
 
   createImagePath(path: string) {
     return `${this.baseUrl + path}`;
+  }
+
+  updateItem() {
+    this.update.emit();
   }
 }
