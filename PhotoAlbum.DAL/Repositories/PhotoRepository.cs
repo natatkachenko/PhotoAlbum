@@ -38,7 +38,7 @@ namespace PhotoAlbum.DAL.Repositories
 
         public Task<Photo> GetByIdAsync(int id)
         {
-            return Task.Run(() => db.Photos.Find(id));
+            return Task.Run(() => db.Photos.AsNoTracking().ToList().Where(p => p.Id == id).FirstOrDefault());
         }
 
         public void Update(Photo entity)

@@ -10,6 +10,7 @@ export class PhotosItemComponent implements OnInit {
   baseUrl = "https://localhost:44356/";
   @Input() item: Photo;
   @Output() update = new EventEmitter();
+  @Output() delete = new EventEmitter();
   
   constructor() {}
 
@@ -22,5 +23,9 @@ export class PhotosItemComponent implements OnInit {
 
   updateItem() {
     this.update.emit();
+  }
+
+  deleteItem() {
+    this.delete.emit();
   }
 }

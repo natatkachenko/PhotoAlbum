@@ -77,4 +77,8 @@ export class PhotosComponent implements OnInit {
   cancelUpdate() {
     this.isUpdate = false;
   }
+
+  deletePhoto(index: number) {
+    this.photoService.deletePhoto(index).subscribe(()=> this.getPhotosDetails());
+  }
 }

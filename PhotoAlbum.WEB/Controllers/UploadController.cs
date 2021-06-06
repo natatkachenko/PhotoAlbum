@@ -48,5 +48,19 @@ namespace PhotoAlbum.WEB.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpDelete("{filePath}")]
+        public ActionResult Delete(string filePath)
+        {
+            string fullPath = Path.Combine(_hostingEnvironment.WebRootPath, filePath);
+
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+                return Ok();
+            }
+            else
+                return NoContent();
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace PhotoAlbum.IoC
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddTransient<IRepository<Photo>, PhotoRepository>();
+            services.AddScoped<IRepository<Photo>, PhotoRepository>();
             services.AddTransient<IService<PhotoDTO>, PhotoService>();
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<PhotoContext>();
