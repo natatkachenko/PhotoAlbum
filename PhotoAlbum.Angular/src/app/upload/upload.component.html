@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-3">
-        <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)">
+        <input type="file" #file placeholder="Choose file" accept=".jpg, .jpeg, .png" (change)="uploadFile(file.files)">
         <button type="button" (click)="file.click()">Upload image</button>
     </div>
     <div class="col-md-4">
