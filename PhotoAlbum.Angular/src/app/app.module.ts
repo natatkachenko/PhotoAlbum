@@ -6,7 +6,7 @@ import { PhotosComponent } from './photos/photos.component';
 import { PhotosItemComponent } from './photos/photos-item/photos-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UploadComponent } from './upload/upload.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterUserComponent } from './register-user/register-user.component';
 
 @NgModule({
@@ -20,7 +20,8 @@ import { RegisterUserComponent } from './register-user/register-user.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
