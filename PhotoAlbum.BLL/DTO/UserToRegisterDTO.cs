@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PhotoAlbum.BLL.DTO
 {
-    public class RegisterUserDTO
+    public class UserToRegisterDTO
     {
         public int Id { get; set; }
         [Required]

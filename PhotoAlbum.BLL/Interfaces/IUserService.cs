@@ -5,8 +5,8 @@ using System.Text;
 
 namespace PhotoAlbum.BLL.Interfaces
 {
-    public interface IUserService : IService<RegisterUserDTO>
+    public interface IUserService : IService<UserToRegisterDTO>
     {
-        bool isExist(RegisterUserDTO dto);
+        bool isExist(UserToRegisterDTO dto);
     }
 }
