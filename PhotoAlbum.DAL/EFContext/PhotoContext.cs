@@ -24,7 +24,7 @@ namespace PhotoAlbum.DAL.EFContext
                 Title = "Forest",
                 Date = new DateTime(2020, 05, 10),
                 Rate = 0,
-                ImagePath = "images/Forest.jpg"
+                ImagePath = "images\\Forest.jpg"
             });
         }
     }

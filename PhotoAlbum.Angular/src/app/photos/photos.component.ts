@@ -31,7 +31,10 @@ export class PhotosComponent implements OnInit {
       title: this.title,
       imagePath: this.response.dbPath
     }
-    this.photoService.postPhotoDetails(this.photo).subscribe(() => this.getPhotosDetails());
+    this.photoService.postPhotoDetails(this.photo).subscribe(() => {
+      this.getPhotosDetails()
+      this.isCreate = false;
+    });
   }
 
   goToCreate() {
@@ -41,5 +44,9 @@ export class PhotosComponent implements OnInit {
 
   uploadFinished(event: any) {
     this.response = event;
+  }
+
+  cancelAdd() {
+    this.isCreate = false;
   }
 }
