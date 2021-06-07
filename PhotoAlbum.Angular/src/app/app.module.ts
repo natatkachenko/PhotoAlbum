@@ -12,6 +12,11 @@ import { RouterModule } from '@angular/router';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginUserComponent } from './login-user/login-user.component';
+import { JwtModule } from "@auth0/angular-jwt";
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -36,7 +41,14 @@ import { LoginUserComponent } from './login-user/login-user.component';
       {path: '404', component: NotFoundComponent},
       {path: '', redirectTo: '/api', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}
-    ])
+    ]),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:44356"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [
     {
