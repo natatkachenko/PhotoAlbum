@@ -11,6 +11,7 @@ import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginUserComponent } from './login-user/login-user.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     UploadComponent,
     RegisterUserComponent,
     MenuComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginUserComponent
   ],
   imports: [
     BrowserModule,
@@ -28,11 +30,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: "api", component: PhotosComponent, pathMatch: 'full'},
-      {path: "register", component: RegisterUserComponent},
+      {path: 'api', component: PhotosComponent, pathMatch: 'full'},
+      {path: 'register', component: RegisterUserComponent},
+      {path: 'login', component: LoginUserComponent},
       {path: '404', component: NotFoundComponent},
-      {path: "", redirectTo: '/api', pathMatch: 'full'},
-      {path: "**", redirectTo: '/404', pathMatch: 'full'}
+      {path: '', redirectTo: '/api', pathMatch: 'full'},
+      {path: '**', redirectTo: '/404', pathMatch: 'full'}
     ])
   ],
   providers: [
