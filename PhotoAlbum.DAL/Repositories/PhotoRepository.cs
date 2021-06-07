@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.DAL.Repositories
 {
-    public class PhotoRepository : IRepository<Photo>
+    public class PhotoRepository : IPhotoRepository
     {
         readonly PhotoContext db;
 
@@ -39,6 +39,11 @@ namespace PhotoAlbum.DAL.Repositories
         public Task<Photo> GetByIdAsync(int id)
         {
             return Task.Run(() => db.Photos.AsNoTracking().ToList().Where(p => p.Id == id).FirstOrDefault());
+        }
+
+        public IEnumerable<Photo> GetPhotosByUserName(string userName)
+        {
+            return db.Photos.AsNoTracking().ToList().Where(p => p.User.UserName == userName && p.isDeleted == false);
         }
 
         public void Update(Photo entity)
