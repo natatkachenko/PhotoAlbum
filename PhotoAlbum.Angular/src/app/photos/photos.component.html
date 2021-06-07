@@ -1,36 +1,3 @@
-<div *ngIf="isCreate">
-    <h1>Add photo</h1>
-    <form>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" required placeholder="Enter your title" [(ngModel)]="title">
-        </div>
-        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
-        <div class="row">
-            <button type="button" class="btn btn-primary" (click)="addPhotoDetails()">Add photo</button>
-            <button type="button" (click)="cancelAdd()">Cancel</button>
-        </div>
-    </form>
+<div>
+    <app-photos></app-photos>
 </div>
-
-<div *ngIf="isUpdate">
-    <h1>Edit title</h1>
-    <form>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" required placeholder="Enter your title" [(ngModel)]="title">
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-primary" (click)="updatePhotoDetails()">Save</button>
-            <button type="button" (click)="cancelUpdate()">Cancel</button>
-        </div>
-    </form>
-</div>
-
-<div *ngIf="!isCreate && !isUpdate">
-    <div class="row">
-        <button type="button" class="btn btn-primary" (click)="goToCreate()">Add photo</button>
-    </div>
-    <app-photos-item *ngFor="let photo of photos; let i = index" [item]="photo" (update)="getPhotoDetailsByIndex(i)" (delete)="deletePhoto(i)"></app-photos-item>
-</div>
-
