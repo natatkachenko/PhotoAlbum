@@ -15,7 +15,6 @@ export class LoginUserComponent implements OnInit {
   public errorMessage: string = '';
   public showError: boolean;
   private _returnUrl: string;
-  private token: string;
 
   constructor(private _authService: AuthenticationService, private _router: Router, private _route: ActivatedRoute) { }
 

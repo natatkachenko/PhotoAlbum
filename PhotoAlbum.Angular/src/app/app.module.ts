@@ -13,6 +13,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { JwtModule } from "@auth0/angular-jwt";
+import { AuthGuard } from './guards/auth.guard';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -35,7 +36,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      {path: 'api', component: PhotosComponent, pathMatch: 'full'},
+      {path: 'api', component: PhotosComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'register', component: RegisterUserComponent},
       {path: 'login', component: LoginUserComponent},
       {path: '404', component: NotFoundComponent},
