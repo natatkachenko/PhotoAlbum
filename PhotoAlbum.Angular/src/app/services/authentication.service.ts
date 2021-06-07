@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LoginResponseDTO } from '../models/user/login-response-dto';
 import { UserToLoginDTO } from '../models/user/user-to-login-dto';
 import { UserToRegisterDTO } from '../models/user/user-to-register-dto';
 import { EnvironmentUrlService } from './environment-url.service';

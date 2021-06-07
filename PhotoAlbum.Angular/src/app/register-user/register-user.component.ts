@@ -27,11 +27,11 @@ export class RegisterUserComponent implements OnInit {
   }
 
   public validateControl(controlName: string) {
-    return this.registerForm.controls[controlName].invalid && this.registerForm.controls[controlName].touched
+    return this.registerForm.controls[controlName].invalid && this.registerForm.controls[controlName].touched;
   }
 
   public hasError(controlName: string, errorName: string) {
-    return this.registerForm.controls[controlName].hasError(errorName)
+    return this.registerForm.controls[controlName].hasError(errorName);
   }
   
   public registerUser(registerFormValue: any) {
