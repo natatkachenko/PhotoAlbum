@@ -20,6 +20,12 @@ namespace PhotoAlbum.BLL.Services
             mapper = map;
         }
 
+        public void AddToRole(User entity, string role)
+        {
+            if (role == "RegisteredUser")
+                _userManager.AddToRoleAsync(entity, "RegisteredUser");
+        }
+
         public bool CheckPassword(User entity, string password)
         {
             return _userManager.CheckPasswordAsync(entity, password).Result;
@@ -34,6 +40,10 @@ namespace PhotoAlbum.BLL.Services
         {
             var user = mapper.Map<User>(userToRegisterDTO);
             var result = _userManager.CreateAsync(user, userToRegisterDTO.Password).Result;
+
+            if (result.Succeeded)
+                AddToRole(user, "RegisteredUser");
+
             return result;
         }
     }

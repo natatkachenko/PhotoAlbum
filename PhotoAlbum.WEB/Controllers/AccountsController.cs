@@ -14,12 +14,12 @@ namespace PhotoAlbum.WEB.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        readonly IAuthenticationService authenticatiionService;
+        readonly IAuthenticationService authenticationService;
         readonly IJWTService JWT;
 
         public AccountsController(IAuthenticationService service, IJWTService JWTService)
         {
-            authenticatiionService = service;
+            authenticationService = service;
             JWT = JWTService;
         }
 
@@ -29,7 +29,7 @@ namespace PhotoAlbum.WEB.Controllers
             if (userToRegisterDTO == null || !ModelState.IsValid)
                 return BadRequest();
 
-            var result = authenticatiionService.RegisterUser(userToRegisterDTO);
+            var result = authenticationService.RegisterUser(userToRegisterDTO);
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
@@ -43,9 +43,9 @@ namespace PhotoAlbum.WEB.Controllers
         [HttpPost("Login")]
         public ActionResult Login([FromBody] UserToLoginDTO userToLoginDTO)
         {
-            var user = authenticatiionService.FindUser(userToLoginDTO);
+            var user = authenticationService.FindUser(userToLoginDTO);
 
-            if (user is null || !authenticatiionService.CheckPassword(user, userToLoginDTO.Password))
+            if (user is null || !authenticationService.CheckPassword(user, userToLoginDTO.Password))
                 return Unauthorized(new LoginResponseDTO { ErrorMessage = "Invalid Authentication" });
 
             var signingCredentials = JWT.GetSigningCredentials();
