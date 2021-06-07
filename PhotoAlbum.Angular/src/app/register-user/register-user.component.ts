@@ -41,7 +41,7 @@ export class RegisterUserComponent implements OnInit {
     const user: UserToRegisterDTO = {
       userName: formValues.userName,
       password: formValues.password,
-      confirmPassword: formValues.confirm
+      passwordConfirm: formValues.confirm
     };
     
     this._authService.registerUser("api/accounts/registration", user)
