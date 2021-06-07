@@ -51,6 +51,7 @@ namespace PhotoAlbum.IoC
             services.AddScoped<IRepository<Photo>, PhotoRepository>();
             services.AddTransient<IService<PhotoDTO>, PhotoService>();
             services.AddTransient<IUserToRegisterService, UserToRegisterService>();
+            services.AddScoped<IJWTService, JWTService>();
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<PhotoContext>();
 
