@@ -9,15 +9,20 @@ using System.Text;
 
 namespace PhotoAlbum.BLL.Services
 {
-    public class UserToRegisterService : IUserToRegisterService
+    public class AuthenticationService : IAuthenticationService
     {
         readonly UserManager<User> _userManager;
         readonly IMapper mapper;
 
-        public UserToRegisterService(UserManager<User> userManager, IMapper map)
+        public AuthenticationService(UserManager<User> userManager, IMapper map)
         {
             _userManager = userManager;
             mapper = map;
+        }
+
+        public User FindUser(UserToLoginDTO userToLoginDTO)
+        {
+            return _userManager.FindByNameAsync(userToLoginDTO.UserName).Result;
         }
 
         public IdentityResult RegisterUser(UserToRegisterDTO userToRegisterDTO)

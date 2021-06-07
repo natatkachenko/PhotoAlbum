@@ -13,11 +13,13 @@ namespace PhotoAlbum.WEB.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        readonly IUserToRegisterService userToRegisterService;
+        readonly IAuthenticationService authenticatiionService;
+        readonly IJWTService JWT;
 
-        public AccountsController(IUserToRegisterService service)
+        public AccountsController(IAuthenticationService service, IJWTService JWTService)
         {
-            userToRegisterService = service;
+            authenticatiionService = service;
+            JWT = JWTService;
         }
 
         [HttpPost("Registration")]
@@ -26,7 +28,7 @@ namespace PhotoAlbum.WEB.Controllers
             if (userToRegisterDTO == null || !ModelState.IsValid)
                 return BadRequest();
 
-            var result = userToRegisterService.RegisterUser(userToRegisterDTO);
+            var result = authenticatiionService.RegisterUser(userToRegisterDTO);
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
