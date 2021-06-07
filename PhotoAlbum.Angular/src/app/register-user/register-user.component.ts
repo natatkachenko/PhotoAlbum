@@ -11,6 +11,8 @@ import { PasswordConfirmationValidatorService } from '../services/password-confi
 })
 export class RegisterUserComponent implements OnInit {
   public registerForm: FormGroup;
+  public errorMessage: string = '';
+  public showError: boolean;
   
   constructor(private _authService: AuthenticationService, private _passConfValidator: PasswordConfirmationValidatorService) { }
 
@@ -31,8 +33,9 @@ export class RegisterUserComponent implements OnInit {
   public hasError(controlName: string, errorName: string) {
     return this.registerForm.controls[controlName].hasError(errorName)
   }
-
+  
   public registerUser(registerFormValue: any) {
+    this.showError = false;
     const formValues = { ...registerFormValue };
 
     const user: UserToRegisterDTO = {
@@ -46,7 +49,8 @@ export class RegisterUserComponent implements OnInit {
       console.log("Successful registration");
     },
     error => {
-      console.log(error.error.errors);
+      this.errorMessage = error;
+      this.showError = true;
     })
   }
 
