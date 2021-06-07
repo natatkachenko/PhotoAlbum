@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhotoAlbum.BLL.DTO;
 using PhotoAlbum.BLL.Interfaces;
@@ -9,6 +10,7 @@ using PhotoAlbum.BLL.Interfaces;
 namespace PhotoAlbum.WEB.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class PhotosController : ControllerBase
     {
