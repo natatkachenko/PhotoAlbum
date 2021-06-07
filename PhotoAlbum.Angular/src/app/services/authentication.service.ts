@@ -26,6 +26,11 @@ export class AuthenticationService {
     this._authChangeSub.next(isAuthenticated);
   }
 
+  public logOut() {
+    localStorage.removeItem("token");
+    this.sendAuthStateChangeNotification(false);
+  }
+
   private createCompleteRoute(route: string, envAddress: string) {
     return `${envAddress}/${route}`;
   }

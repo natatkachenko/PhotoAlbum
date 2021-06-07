@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class MenuComponent implements OnInit {
   public isUserAuthenticated: boolean;
 
-  constructor(private _authService: AuthenticationService) { }
+  constructor(private _authService: AuthenticationService, private _router: Router) { }
 
   ngOnInit(): void {
     this._authService.authChanged
@@ -18,4 +19,8 @@ export class MenuComponent implements OnInit {
     })
   }
 
+  public logOut() {
+    this._authService.logOut();
+    this._router.navigate(["/"]);
+  }
 }
