@@ -21,7 +21,7 @@ namespace PhotoAlbum.DAL.Repositories
 
         public IPhotoRepository PhotoRepository => photoRepository = photoRepository ?? new PhotoRepository(db);
 
-        public IRepository<User> UserRepository => userRepository = userRepository ?? new UserRepository(db);
+        public IUserRepository UserRepository => userRepository = userRepository ?? new UserRepository(db);
 
         public Task<int> SaveAsync()
         {

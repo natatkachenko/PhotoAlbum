@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.DAL.Repositories
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : IUserRepository
     {
         readonly PhotoContext db;
 
@@ -39,6 +39,11 @@ namespace PhotoAlbum.DAL.Repositories
         public Task<User> GetByIdAsync(int id)
         {
             return Task.Run(() => db.Users.Find(id));
+        }
+
+        public User GetUserByUserName(string userName)
+        {
+            return db.Users.AsNoTracking().ToList().FirstOrDefault(u => u.UserName == userName);
         }
 
         public void Update(User entity)
