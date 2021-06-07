@@ -14,6 +14,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthGuard } from './guards/auth.guard';
+import { MyPhotosComponent } from './my-photos/my-photos.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -28,7 +29,8 @@ export function tokenGetter() {
     RegisterUserComponent,
     MenuComponent,
     NotFoundComponent,
-    LoginUserComponent
+    LoginUserComponent,
+    MyPhotosComponent
   ],
   imports: [
     BrowserModule,

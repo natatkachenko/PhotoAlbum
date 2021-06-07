@@ -10,7 +10,6 @@ using PhotoAlbum.BLL.Interfaces;
 namespace PhotoAlbum.WEB.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class PhotosController : ControllerBase
     {
