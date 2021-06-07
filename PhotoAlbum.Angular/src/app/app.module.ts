@@ -10,6 +10,7 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { ErrorHandlerService } from './services/error-handler.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ErrorHandlerService } from './services/error-handler.service';
     PhotosItemComponent,
     UploadComponent,
     RegisterUserComponent,
-    MenuComponent
+    MenuComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,9 @@ import { ErrorHandlerService } from './services/error-handler.service';
     RouterModule.forRoot([
       { path: "api", component: PhotosComponent, pathMatch: 'full'},
       {path: "register", component: RegisterUserComponent},
-      {path: "**", redirectTo: 'api'}
+      {path: '404', component: NotFoundComponent},
+      {path: "", redirectTo: '/api', pathMatch: 'full'},
+      {path: "**", redirectTo: '/404', pathMatch: 'full'}
     ])
   ],
   providers: [
