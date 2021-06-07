@@ -11,5 +11,6 @@ namespace PhotoAlbum.BLL.Interfaces
     {
         IdentityResult RegisterUser(UserToRegisterDTO userToRegisterDTO);
         User FindUser(UserToLoginDTO userToLoginDTO);
+        bool CheckPassword(User entity, string password);
     }
 }

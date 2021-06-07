@@ -20,6 +20,11 @@ namespace PhotoAlbum.BLL.Services
             mapper = map;
         }
 
+        public bool CheckPassword(User entity, string password)
+        {
+            return _userManager.CheckPasswordAsync(entity, password).Result;
+        }
+
         public User FindUser(UserToLoginDTO userToLoginDTO)
         {
             return _userManager.FindByNameAsync(userToLoginDTO.UserName).Result;

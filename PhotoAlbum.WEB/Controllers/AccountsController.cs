@@ -38,5 +38,19 @@ namespace PhotoAlbum.WEB.Controllers
 
             return StatusCode(201);
         }
+
+        [HttpPost("Login")]
+        public ActionResult Login([FromBody] UserToLoginDTO userToLoginDTO)
+        {
+            var user = authenticatiionService.FindUser(userToLoginDTO);
+
+            if (user is null || !await _userManager.CheckPasswordAsync(user, userForAuthentication.Password))
+                return Unauthorized(new AuthResponseDto { ErrorMessage = "Invalid Authentication" });
+            var signingCredentials = _jwtHandler.GetSigningCredentials();
+            var claims = _jwtHandler.GetClaims(user);
+            var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
+        }
     }
 }
