@@ -41,6 +41,7 @@ export function tokenGetter() {
       {path: 'api', component: PhotosComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'register', component: RegisterUserComponent},
       {path: 'login', component: LoginUserComponent},
+      {path: 'myphotos', component: MyPhotosComponent},
       {path: '404', component: NotFoundComponent},
       {path: '', redirectTo: '/api', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}
