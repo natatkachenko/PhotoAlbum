@@ -13,7 +13,7 @@ namespace PhotoAlbum.BLL.DTO
         public string Title { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public int Rate { get; set; }
-        public string UserName { get; set; }
+        public string UserId { get; set; }
         [Required]
         public string ImagePath { get; set; }
         public bool isDeleted { get; set; } = false;

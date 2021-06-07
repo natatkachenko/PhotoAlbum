@@ -12,11 +12,11 @@ namespace PhotoAlbum.DAL.Entities
         public string Title { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public int Rate { get; set; }
-        public string UserName { get; set; }
+        public string UserId { get; set; }
         public string ImagePath { get; set; }
         public bool isDeleted { get; set; } = false;
 
-        [ForeignKey("UserName")]
+        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }
