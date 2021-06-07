@@ -91,8 +91,7 @@ namespace PhotoAlbum.WEB.Controllers
         [HttpGet("MyPhotos")]
         public ActionResult<IEnumerable<PhotoDTO>> GetUserPhotos()
         {
-            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
-            var userName = claims.FirstOrDefault(c => c.Type.EndsWith("name")).Value;
+            var userName = GetUserName();
 
             var photos = photoService.GetPhotosByUserName(userName);
 
@@ -100,6 +99,13 @@ namespace PhotoAlbum.WEB.Controllers
                 return NoContent();
 
             return Ok(photos);
+        }
+
+        private string GetUserName()
+        {
+            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+            var userName = claims.FirstOrDefault(c => c.Type.EndsWith("name")).Value;
+            return userName;
         }
     }
 }
