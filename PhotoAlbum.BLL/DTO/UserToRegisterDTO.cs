@@ -7,16 +7,13 @@ namespace PhotoAlbum.BLL.DTO
 {
     public class UserToRegisterDTO
     {
-        [Required]
-        [Display(Name = "Login")]
+        [Required(ErrorMessage = "User Name is required")]
         public string UserName { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
+
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
+
         [Compare("Password", ErrorMessage = "Passwords don't match!")]
-        [Display(Name = "Confirm password")]
         public string PasswordConfirm { get; set; }
         public bool isDeleted { get; set; } = false;
     }
