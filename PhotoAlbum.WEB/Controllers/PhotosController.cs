@@ -88,9 +88,12 @@ namespace PhotoAlbum.WEB.Controllers
         }
 
         [Authorize]
-        [HttpGet("{userName}")]
-        public ActionResult<IEnumerable<PhotoDTO>> GetByUserName(string userName)
+        [HttpGet("MyPhotos")]
+        public ActionResult<IEnumerable<PhotoDTO>> GetUserPhotos()
         {
+            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+            var userName = claims.FirstOrDefault(c => c.Type.EndsWith("name")).Value;
+
             var photos = photoService.GetPhotosByUserName(userName);
 
             if (photos is null)
