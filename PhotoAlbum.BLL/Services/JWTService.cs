@@ -12,12 +12,10 @@ namespace PhotoAlbum.BLL.Services
 {
     public class JWTService : IJWTService
     {
-        readonly IConfiguration configuration;
         readonly IConfigurationSection jwtSettings;
 
         public JWTService(IConfiguration conf)
         {
-            configuration = conf;
             jwtSettings = conf.GetSection("JwtSettings");
         }
 
