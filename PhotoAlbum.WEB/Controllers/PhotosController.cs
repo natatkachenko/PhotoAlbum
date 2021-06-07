@@ -14,10 +14,12 @@ namespace PhotoAlbum.WEB.Controllers
     public class PhotosController : ControllerBase
     {
         readonly IPhotoService photoService;
+        readonly IUserService userService;
 
-        public PhotosController(IPhotoService service)
+        public PhotosController(IPhotoService service, IUserService _userService)
         {
             photoService = service;
+            userService = _userService;
         }
 
         // GET: api/photos
@@ -45,6 +47,10 @@ namespace PhotoAlbum.WEB.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var userName = GetUserName();
+                    var user = userService.GetUserByUserName(userName);
+                    model.UserId = user.Id;
+
                     await photoService.AddAsync(model);
                     return Ok(model);
                 }
