@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PhotoAlbum.BLL.Interfaces;
+using PhotoAlbum.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,10 +14,12 @@ namespace PhotoAlbum.BLL.Services
     public class JWTService : IJWTService
     {
         readonly IConfigurationSection jwtSettings;
+        readonly UserManager<User> userManager;
 
-        public JWTService(IConfiguration conf)
+        public JWTService(IConfiguration conf, UserManager<User> manager)
         {
             jwtSettings = conf.GetSection("JwtSettings");
+            userManager = manager;
         }
 
         public JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
@@ -31,12 +34,19 @@ namespace PhotoAlbum.BLL.Services
             return tokenOptions;
         }
 
-        public List<Claim> GetClaims(IdentityUser user)
+        public List<Claim> GetClaims(User user)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName)
             };
+
+            var roles = userManager.GetRolesAsync(user).Result;
+            foreach(var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             return claims;
         }
 
