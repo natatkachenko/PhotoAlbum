@@ -35,4 +35,8 @@ export class PhotoService {
   deletePhoto(id: number) {
     return this.http.delete(this.baseUrl + "photos/" + ++id, {headers: this.headers });
   }
+
+  getUserPhotos(): Observable<Photo[]> {
+    return this.http.get<Photo[]>(this.baseUrl + "photos" + "myphotos");
+  }
 }
