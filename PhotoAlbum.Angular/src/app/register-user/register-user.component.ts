@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserToRegisterDTO } from '../models/user/user-to-register-dto';
 import { AuthenticationService } from '../services/authentication.service';
+import { PasswordConfirmationValidatorService } from '../services/password-confirmation-validator.service';
 
 @Component({
   selector: 'app-register-user',
@@ -11,7 +12,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class RegisterUserComponent implements OnInit {
   public registerForm: FormGroup;
   
-  constructor(private _authService: AuthenticationService) { }
+  constructor(private _authService: AuthenticationService, private _passConfValidator: PasswordConfirmationValidatorService) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -19,6 +20,8 @@ export class RegisterUserComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       confirm: new FormControl('')
     });
+    this.registerForm.get('confirm').setValidators([Validators.required,
+      this._passConfValidator.validateConfirmPassword(this.registerForm.get('password'))]);
   }
 
   public validateControl(controlName: string) {
