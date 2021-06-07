@@ -8,7 +8,7 @@ namespace PhotoAlbum.DAL.Interfaces
 {
     public interface IUnitOfWork
     {
-        IRepository<Photo> PhotoRepository { get; }
+        IPhotoRepository PhotoRepository { get; }
         IRepository<User> UserRepository { get; }
 
         Task<int> SaveAsync();

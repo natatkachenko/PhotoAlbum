@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.BLL.Services
 {
-    public class PhotoService : IService<PhotoDTO>
+    public class PhotoService : IPhotoService
     {
         IUnitOfWork Database { get; set; }
         readonly IMapper mapper;
@@ -64,6 +64,14 @@ namespace PhotoAlbum.BLL.Services
             photo.isDeleted = true;
 
             return UpdateAsync(photo);
+        }
+
+        public IEnumerable<PhotoDTO> GetPhotosByUserName(string userName)
+        {
+            if (String.IsNullOrEmpty(userName))
+                throw new PhotoAlbumException($"{nameof(userName)} cannot be null or empty!", nameof(userName));
+
+            return mapper.Map<IEnumerable<PhotoDTO>>(Database.PhotoRepository.GetPhotosByUserName(userName));
         }
 
         private void CheckDTOProperties(PhotoDTO dto)

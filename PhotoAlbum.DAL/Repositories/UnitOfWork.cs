@@ -19,7 +19,7 @@ namespace PhotoAlbum.DAL.Repositories
             db = context;
         }
 
-        public IRepository<Photo> PhotoRepository => photoRepository = photoRepository ?? new PhotoRepository(db);
+        public IPhotoRepository PhotoRepository => photoRepository = photoRepository ?? new PhotoRepository(db);
 
         public IRepository<User> UserRepository => userRepository = userRepository ?? new UserRepository(db);
 
