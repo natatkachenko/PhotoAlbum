@@ -13,14 +13,15 @@ namespace PhotoAlbum.WEB.Controllers
     [ApiController]
     public class PhotosController : ControllerBase
     {
-        readonly IService<PhotoDTO> photoService;
+        readonly IPhotoService photoService;
 
-        public PhotosController(IService<PhotoDTO> service)
+        public PhotosController(IPhotoService service)
         {
             photoService = service;
         }
 
         // GET: api/photos
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<PhotoDTO>> GetAll ()
         {
@@ -84,6 +85,18 @@ namespace PhotoAlbum.WEB.Controllers
             var photoDTO = photoService.GetByIdAsync(id).Result;
             
             return RedirectToAction("Delete", "Upload", new { filePath = photoDTO.ImagePath });
+        }
+
+        [Authorize]
+        [HttpGet("{userName}")]
+        public ActionResult<IEnumerable<PhotoDTO>> GetByUserName(string userName)
+        {
+            var photos = photoService.GetPhotosByUserName(userName);
+
+            if (photos is null)
+                return NoContent();
+
+            return Ok(photos);
         }
     }
 }
