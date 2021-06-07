@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  public isUserAuthenticated: boolean;
 
-  constructor() { }
+  constructor(private _authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this._authService.authChanged
+    .subscribe(res => {
+      this.isUserAuthenticated = res;
+    })
   }
 
 }
