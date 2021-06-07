@@ -109,8 +109,8 @@ namespace PhotoAlbum.WEB.Controllers
 
         private string GetUserName()
         {
-            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
-            var userName = claims.FirstOrDefault(c => c.Type.EndsWith("name")).Value;
+            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToArray();
+            var userName = claims[0].Value;
             return userName;
         }
     }

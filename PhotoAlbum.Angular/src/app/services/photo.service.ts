@@ -37,6 +37,6 @@ export class PhotoService {
   }
 
   getUserPhotos(): Observable<Photo[]> {
-    return this.http.get<Photo[]>(this.baseUrl + "photos" + "myphotos");
+    return this.http.get<Photo[]>(this.baseUrl + "photos/" + "myphotos");
   }
 }

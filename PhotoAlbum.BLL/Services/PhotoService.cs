@@ -71,7 +71,11 @@ namespace PhotoAlbum.BLL.Services
             if (String.IsNullOrEmpty(userName))
                 throw new PhotoAlbumException($"{nameof(userName)} cannot be null or empty!", nameof(userName));
 
-            return mapper.Map<IEnumerable<PhotoDTO>>(Database.PhotoRepository.GetPhotosByUserName(userName));
+            var photos = Database.PhotoRepository.GetPhotosByUserName(userName);
+            if (photos is null)
+                return null;
+
+            return mapper.Map<IEnumerable<PhotoDTO>>(photos);
         }
 
         private void CheckDTOProperties(PhotoDTO dto)

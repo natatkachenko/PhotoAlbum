@@ -43,7 +43,8 @@ namespace PhotoAlbum.DAL.Repositories
 
         public IEnumerable<Photo> GetPhotosByUserName(string userName)
         {
-            return db.Photos.AsNoTracking().ToList().Where(p => p.User.UserName == userName && p.isDeleted == false);
+            var photos = GetAll().Where(p => p.User.UserName == userName && p.isDeleted == false).ToList();
+            return photos;
         }
 
         public void Update(Photo entity)
