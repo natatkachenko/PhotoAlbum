@@ -78,13 +78,5 @@ namespace PhotoAlbum.BLL.Services
             Database.UserRepository.Update(mapper.Map<User>(dto));
             return Database.SaveAsync();
         }
-
-        public User GetUserByUserName(string userName)
-        {
-            if (String.IsNullOrEmpty(userName))
-                throw new PhotoAlbumException($"{nameof(userName)} cannot be null or empty!", nameof(userName));
-
-            return Database.UserRepository.GetUserByUserName(userName);
-        }
     }
 }

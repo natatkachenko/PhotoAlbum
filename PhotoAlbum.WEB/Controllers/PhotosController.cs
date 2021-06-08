@@ -35,8 +35,15 @@ namespace PhotoAlbum.WEB.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PhotoDTO>> GetById(int id)
         {
-            var photo = await photoService.GetByIdAsync(id);
-            return Ok(photo);
+            try
+            {
+                var photo = await photoService.GetByIdAsync(id);
+                return Ok(photo);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         // POST api/photos

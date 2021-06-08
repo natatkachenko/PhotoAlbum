@@ -9,6 +9,5 @@ namespace PhotoAlbum.BLL.Interfaces
     public interface IUserService : IService<UserToRegisterDTO>
     {
         bool isExist(UserToRegisterDTO dto);
-        User GetUserByUserName(string userName);
     }
 }
