@@ -93,10 +93,17 @@ namespace PhotoAlbum.WEB.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<PhotoDTO>> Delete(int id)
         {
-            await photoService.DeleteByIdAsync(id);
-            var photoDTO = photoService.GetByIdAsync(id).Result;
-            
-            return RedirectToAction("Delete", "Upload", new { filePath = photoDTO.ImagePath });
+            try
+            {
+                await photoService.DeleteByIdAsync(id);
+                var photoDTO = photoService.GetByIdAsync(id).Result;
+
+                return RedirectToAction("Delete", "Upload", new { filePath = photoDTO.ImagePath });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [Authorize]

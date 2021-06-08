@@ -1,12 +1,18 @@
 ﻿using PhotoAlbum.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PhotoAlbum.DAL.Interfaces
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository
     {
+        IQueryable<User> GetAll();
+        Task<User> GetByIdAsync(string id);
+        void Update(User entity);
+        void DeleteById(string id);
         User GetUserByUserName(string userName);
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserDTO } from '../models/user/user-dto';
 import { UserToRegisterDTO } from '../models/user/user-to-register-dto';
 import { PasswordConfirmationValidatorService } from '../services/password-confirmation-validator.service';
 import { UserManagementService } from '../services/user-management.service';
@@ -15,12 +16,18 @@ export class UserManagementComponent implements OnInit {
   public errorMessage: string = '';
   public showError: boolean;
   public isAddClicked: boolean;
+  public users: UserDTO[];
   
   constructor(private userManagementService: UserManagementService, private _router: Router, 
     private _passConfValidator: PasswordConfirmationValidatorService) { }
 
   ngOnInit(): void {
     this.isAddClicked = false;
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.userManagementService.getUsers().subscribe(result => this.users = result);
   }
 
   public makeForm() {
@@ -63,4 +70,8 @@ export class UserManagementComponent implements OnInit {
     })
   }
 
+  deleteUser(index: number) {
+    let userId=this.users[index].id;
+    this.userManagementService.deleteUser(userId).subscribe(()=> this.getUsers());
+  }
 }

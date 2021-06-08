@@ -29,21 +29,7 @@ namespace PhotoAlbum.BLL.Services
             SignInManager = signInManager;
         }
 
-        public Task AddAsync(UserToRegisterDTO dto)
-        {
-            var result = UserManager.CreateAsync(mapper.Map<User>(dto), dto.Password).Result;
-            if (result.Succeeded)
-            {
-                Database.UserRepository.Add(mapper.Map<User>(dto));
-                Database.SaveAsync();
-                var user = Database.UserRepository.GetAll().LastOrDefault();
-                return SignInManager.SignInAsync(user, false);
-            }
-            else
-                throw new PhotoAlbumException("Adding of the new user was failed!");
-        }
-
-        public Task DeleteByIdAsync(int id)
+        public Task DeleteByIdAsync(string id)
         {
             var user = GetByIdAsync(id).Result;
 
@@ -55,28 +41,39 @@ namespace PhotoAlbum.BLL.Services
             return UpdateAsync(user);
         }
 
-        public IEnumerable<UserToRegisterDTO> GetAll()
+        public IEnumerable<UserDTO> GetAll()
         {
-            return mapper.Map<IEnumerable<UserToRegisterDTO>>(Database.UserRepository.GetAll());
+            return mapper.Map<IEnumerable<UserDTO>>(Database.UserRepository.GetAll().ToList()
+                .Where(u => u.isDeleted == false));
         }
 
-        public Task<UserToRegisterDTO> GetByIdAsync(int id)
+        public Task<UserDTO> GetByIdAsync(string id)
         {
-            if (id >= 1)
-                return Task.Run(() => mapper.Map<UserToRegisterDTO>(Database.UserRepository.GetByIdAsync(id).Result));
+            if (id != null)
+                return Task.Run(() => mapper.Map<UserDTO>(Database.UserRepository.GetByIdAsync(id).Result));
             else
-                throw new PhotoAlbumException($"{nameof(id)} cannot be less than or equal to 0!", nameof(id));
+                throw new PhotoAlbumException($"{nameof(id)} cannot be null or empty!", nameof(id));
         }
 
-        public bool isExist(UserToRegisterDTO dto)
-        {
-            return SignInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false).Result.Succeeded;
-        }
+        //public bool isExist(UserToRegisterDTO dto)
+        //{
+        //    return SignInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false).Result.Succeeded;
+        //}
 
-        public Task UpdateAsync(UserToRegisterDTO dto)
+        public Task UpdateAsync(UserDTO dto)
         {
+            CheckDTOProperties(dto);
+
             Database.UserRepository.Update(mapper.Map<User>(dto));
             return Database.SaveAsync();
+        }
+
+        private void CheckDTOProperties(UserDTO dto)
+        {
+            if (String.IsNullOrEmpty(dto.Id))
+                throw new PhotoAlbumException($"{nameof(dto.Id)} cannot be null or empty!", nameof(dto.Id));
+            if (String.IsNullOrEmpty(dto.UserName))
+                throw new PhotoAlbumException($"{nameof(dto.UserName)} cannot be null!", nameof(dto.UserName));
         }
     }
 }

@@ -45,4 +45,15 @@
         </form>
     </div>
 </div>
+<table>
+    <thead>
+        <th>User Name</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; let i = index">
+            <td>{{ user.userName }}</td>
+            <td><button (click)="deleteUser(i)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
 

@@ -15,6 +15,7 @@ namespace PhotoAlbum.BLL
                 .ForMember(pdto => pdto.UserName, p => p.MapFrom(photo => photo.User.UserName))
                 .ReverseMap();
             CreateMap<User, UserToRegisterDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
         }
     }
 }

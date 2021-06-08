@@ -57,7 +57,7 @@ export class ErrorHandlerService implements HttpInterceptor {
       return 'Authentication failed. Wrong User Name or Password.';
     }
     else {
-      this._router.navigate(['/login']);
+      this._router.navigate(['/login'], { queryParams: { returnUrl: this._router.url }});
       return error.message;
     }
   }

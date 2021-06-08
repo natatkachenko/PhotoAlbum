@@ -15,17 +15,38 @@ namespace PhotoAlbum.WEB.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        readonly IAuthenticationService authenticationService;
+        readonly IUserService _userService;
 
-        public UsersController(IAuthenticationService service)
+        public UsersController(IUserService userService)
         {
-            authenticationService = service;
+            _userService = userService;
         }
 
         [HttpPost("CreateUser")]
         public ActionResult CreateUser([FromBody] UserToRegisterDTO userToRegisterDTO)
         {
             return RedirectToActionPreserveMethod("RegisterUser", "Accounts", new { userToRegisterDTO });
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<UserDTO>> GetAll()
+        {
+            var users = _userService.GetAll();
+            return Ok(users);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserDTO>> Delete(string id)
+        {
+            try
+            {
+                await _userService.DeleteByIdAsync(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

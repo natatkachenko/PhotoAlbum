@@ -19,12 +19,7 @@ namespace PhotoAlbum.DAL.Repositories
             db = context;
         }
 
-        public void Add(User entity)
-        {
-            db.Add(entity);
-        }
-
-        public void DeleteById(int id)
+        public void DeleteById(string id)
         {
             var user = db.Users.Find(id);
             if (user != null)
@@ -36,9 +31,10 @@ namespace PhotoAlbum.DAL.Repositories
             return db.Users;
         }
 
-        public Task<User> GetByIdAsync(int id)
+        public Task<User> GetByIdAsync(string id)
         {
-            return Task.Run(() => db.Users.Find(id));
+            var user = GetAll().AsNoTracking().ToList().FirstOrDefault(u => u.Id == id);
+            return Task.Run(() => user);
         }
 
         public User GetUserByUserName(string userName)
@@ -48,7 +44,9 @@ namespace PhotoAlbum.DAL.Repositories
 
         public void Update(User entity)
         {
-            db.Entry(entity).State = EntityState.Modified;
+            var user = db.Users.FirstOrDefault(u => u.Id == entity.Id);
+            user.isDeleted = entity.isDeleted;
+            db.Entry(user).State = EntityState.Modified;
         }
     }
 }

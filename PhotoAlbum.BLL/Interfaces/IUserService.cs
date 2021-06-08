@@ -3,11 +3,16 @@ using PhotoAlbum.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PhotoAlbum.BLL.Interfaces
 {
-    public interface IUserService : IService<UserToRegisterDTO>
+    public interface IUserService
     {
-        bool isExist(UserToRegisterDTO dto);
+        //bool isExist(UserToRegisterDTO dto);
+        IEnumerable<UserDTO> GetAll();
+        Task<UserDTO> GetByIdAsync(string id);
+        Task UpdateAsync(UserDTO dto);
+        Task DeleteByIdAsync(string id);
     }
 }

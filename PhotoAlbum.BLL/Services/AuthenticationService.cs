@@ -42,7 +42,11 @@ namespace PhotoAlbum.BLL.Services
 
         public User FindUser(UserToLoginDTO userToLoginDTO)
         {
-            return _userManager.FindByNameAsync(userToLoginDTO.UserName).Result;
+            var user = _userManager.FindByNameAsync(userToLoginDTO.UserName).Result;
+            if (user is null || user.isDeleted == true)
+                return null;
+
+            return user;
         }
 
         public IdentityResult RegisterUser(UserToRegisterDTO userToRegisterDTO)
