@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Photo } from '../models/photo';
 import { PhotoToCreate } from '../models/photo-to-create';
 import { PhotoToUpdate } from '../models/photo-to-update';
@@ -12,6 +13,7 @@ import { PhotoService } from '../services/photo.service';
 export class MyPhotosComponent implements OnInit {
   public photos: Photo[];
   public title: string;
+  public userName: string;
   public photoToCreate: PhotoToCreate;
   public photoToUpdate: PhotoToUpdate;
   public isCreate: boolean;
@@ -19,7 +21,7 @@ export class MyPhotosComponent implements OnInit {
   
   public response: {dbPath: ''};
 
-  constructor(private photoService: PhotoService) { }
+  constructor(private photoService: PhotoService, private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
     this.getUserPhotos();
@@ -34,6 +36,7 @@ export class MyPhotosComponent implements OnInit {
   addPhotoDetails() {
     this.photoToCreate = {
       title: this.title,
+      userName: this.getUserNameFromToken(),
       imagePath: this.response.dbPath
     }
     this.photoService.postPhotoDetails(this.photoToCreate).subscribe(() => {
@@ -56,7 +59,8 @@ export class MyPhotosComponent implements OnInit {
   }
 
   getPhotoDetailsByIndex(index: number) {
-    this.photoService.getPhotosDetailsById(index).subscribe(result=> {
+    let photoId=this.photos[index].id;
+    this.photoService.getPhotosDetailsById(photoId).subscribe(result=> {
       this.photoToUpdate = result;
       this.isUpdate = true;
     });
@@ -66,7 +70,8 @@ export class MyPhotosComponent implements OnInit {
     this.photoToUpdate = {
       id: this.photoToUpdate.id,
       title: this.title,
-      imagePath: this.photoToUpdate.imagePath
+      imagePath: this.photoToUpdate.imagePath,
+      userName: this.getUserNameFromToken()
     }
     this.photoService.putPhotoDetails(this.photoToUpdate).subscribe(() =>{
       this.getUserPhotos();
@@ -79,6 +84,14 @@ export class MyPhotosComponent implements OnInit {
   }
 
   deletePhoto(index: number) {
-    this.photoService.deletePhoto(index).subscribe(()=> this.getUserPhotos());
+    let photoId=this.photos[index].id;
+    this.photoService.deletePhoto(photoId).subscribe(()=> this.getUserPhotos());
+  }
+
+  getUserNameFromToken() {
+    let token=localStorage.getItem("token");
+    let decodedToken=this.jwtHelper.decodeToken(token);
+    let name=decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    return name;
   }
 }

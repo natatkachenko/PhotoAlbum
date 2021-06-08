@@ -7,6 +7,6 @@ namespace PhotoAlbum.DAL.Interfaces
 {
     public interface IPhotoRepository : IRepository<Photo>
     {
-        IEnumerable<Photo> GetPhotosByUserName(string userName);
+        void SetUserToEntity(Photo entity);
     }
 }

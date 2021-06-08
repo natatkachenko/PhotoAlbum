@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PhotoAlbum.DAL.EFContext;
 using PhotoAlbum.DAL.Entities;
 using PhotoAlbum.DAL.Interfaces;
@@ -21,6 +22,8 @@ namespace PhotoAlbum.DAL.Repositories
 
         public void Add(Photo entity)
         {
+            var user = db.Users.FirstOrDefault(u => u.UserName == entity.User.UserName);
+            entity.User = user;
             db.Photos.Add(entity);
         }
 
@@ -33,23 +36,26 @@ namespace PhotoAlbum.DAL.Repositories
 
         public IQueryable<Photo> GetAll()
         {
-            return db.Photos;
+            return db.Photos.Include(p => p.User);
         }
 
         public Task<Photo> GetByIdAsync(int id)
         {
-            return Task.Run(() => db.Photos.AsNoTracking().ToList().Where(p => p.Id == id).FirstOrDefault());
-        }
-
-        public IEnumerable<Photo> GetPhotosByUserName(string userName)
-        {
-            var photos = GetAll().Where(p => p.User.UserName == userName && p.isDeleted == false).ToList();
-            return photos;
+            var photo = GetAll().AsNoTracking().ToList().FirstOrDefault(p => p.Id == id);
+            return Task.Run(() => photo);
         }
 
         public void Update(Photo entity)
         {
+            SetUserToEntity(entity);
+
             db.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void SetUserToEntity(Photo entity)
+        {
+            var user = db.Users.FirstOrDefault(u => u.UserName == entity.User.UserName);
+            entity.User = user;
         }
     }
 }

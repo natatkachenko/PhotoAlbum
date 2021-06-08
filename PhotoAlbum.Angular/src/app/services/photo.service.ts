@@ -21,19 +21,19 @@ export class PhotoService {
   }
 
   getPhotosDetailsById(id: number) {
-    return this.http.get<Photo>(this.baseUrl + "photos/" + ++id);
+    return this.http.get<Photo>(this.baseUrl + "photos/" + id);
   }
 
   postPhotoDetails(photo: PhotoToCreate) {
     return this.http.post(this.baseUrl + "photos", photo);
   }
-
+  
   putPhotoDetails(photo: PhotoToUpdate) {
     return this.http.put(this.baseUrl + "photos", photo);
   }
 
   deletePhoto(id: number) {
-    return this.http.delete(this.baseUrl + "photos/" + ++id, {headers: this.headers });
+    return this.http.delete(this.baseUrl + "photos/" + id, {headers: this.headers });
   }
 
   getUserPhotos(): Observable<Photo[]> {

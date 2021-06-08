@@ -40,6 +40,7 @@ namespace PhotoAlbum.WEB.Controllers
         }
 
         // POST api/photos
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<PhotoDTO>> Add([FromBody] PhotoDTO model)
         {
@@ -47,10 +48,6 @@ namespace PhotoAlbum.WEB.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var userName = GetUserName();
-                    var user = userService.GetUserByUserName(userName);
-                    model.UserId = user.Id;
-
                     await photoService.AddAsync(model);
                     return Ok(model);
                 }
@@ -64,6 +61,7 @@ namespace PhotoAlbum.WEB.Controllers
         }
 
         // PUT api/photos
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult<PhotoDTO>> Update(PhotoDTO model)
         {
@@ -84,6 +82,7 @@ namespace PhotoAlbum.WEB.Controllers
         }
 
         // DELETE api/photos/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<PhotoDTO>> Delete(int id)
         {
@@ -97,21 +96,12 @@ namespace PhotoAlbum.WEB.Controllers
         [HttpGet("MyPhotos")]
         public ActionResult<IEnumerable<PhotoDTO>> GetUserPhotos()
         {
-            var userName = GetUserName();
-
-            var photos = photoService.GetPhotosByUserName(userName);
+            var photos = photoService.GetPhotosByUserName(User.Identity.Name);
 
             if (photos is null)
                 return NoContent();
 
             return Ok(photos);
-        }
-
-        private string GetUserName()
-        {
-            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToArray();
-            var userName = claims[0].Value;
-            return userName;
         }
     }
 }
