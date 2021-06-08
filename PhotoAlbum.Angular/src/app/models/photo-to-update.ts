@@ -3,4 +3,5 @@ export interface PhotoToUpdate {
     title: string;
     imagePath: string;
     userName: string;
+    rate: number;
 }

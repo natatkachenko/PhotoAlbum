@@ -38,7 +38,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      {path: 'api', component: PhotosComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      {path: 'api', component: PhotosComponent, pathMatch: 'full'},
       {path: 'register', component: RegisterUserComponent},
       {path: 'login', component: LoginUserComponent},
       {path: 'myphotos', component: MyPhotosComponent},

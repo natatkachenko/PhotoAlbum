@@ -36,6 +36,14 @@ namespace PhotoAlbum.DAL.Repositories
 
         public IQueryable<Photo> GetAll()
         {
+            if(db.Photos.FirstOrDefault().UserId is null)
+            {
+                var photo = db.Photos.FirstOrDefault();
+                photo.User = db.Users.FirstOrDefault();
+                Update(photo);
+                db.SaveChanges();
+            }
+
             return db.Photos.Include(p => p.User);
         }
 

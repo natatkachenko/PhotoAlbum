@@ -71,7 +71,8 @@ export class MyPhotosComponent implements OnInit {
       id: this.photoToUpdate.id,
       title: this.title,
       imagePath: this.photoToUpdate.imagePath,
-      userName: this.getUserNameFromToken()
+      userName: this.getUserNameFromToken(),
+      rate: this.photoToUpdate.rate
     }
     this.photoService.putPhotoDetails(this.photoToUpdate).subscribe(() =>{
       this.getUserPhotos();

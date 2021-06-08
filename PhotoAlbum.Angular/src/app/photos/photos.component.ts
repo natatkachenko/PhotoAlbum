@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Photo } from '../models/photo';
+import { PhotoToUpdate } from '../models/photo-to-update';
 import { EnvironmentUrlService } from '../services/environment-url.service';
 import { PhotoService } from '../services/photo.service';
 
@@ -10,6 +11,7 @@ import { PhotoService } from '../services/photo.service';
 })
 export class PhotosComponent implements OnInit {
   public photos: Photo[];
+  public photoToUpdate: PhotoToUpdate;
 
   constructor(private photoService: PhotoService, private envUrl: EnvironmentUrlService) {}
 
@@ -23,5 +25,18 @@ export class PhotosComponent implements OnInit {
 
   createImagePath(path: string) {
     return `${this.envUrl.urlAddress + "/" + path}`;
+  }
+
+  increasePhotoRate(index: number) {
+    this.photoToUpdate = {
+      id: this.photos[index].id,
+      title: this.photos[index].title,
+      imagePath: this.photos[index].imagePath,
+      userName: this.photos[index].userName,
+      rate: ++this.photos[index].rate
+    }
+
+    this.photoService.putPhotoDetails(this.photoToUpdate).subscribe(() =>
+    this.getPhotosDetails());
   }
 }

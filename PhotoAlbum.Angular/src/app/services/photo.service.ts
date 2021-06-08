@@ -27,7 +27,7 @@ export class PhotoService {
   postPhotoDetails(photo: PhotoToCreate) {
     return this.http.post(this.baseUrl + "photos", photo);
   }
-  
+
   putPhotoDetails(photo: PhotoToUpdate) {
     return this.http.put(this.baseUrl + "photos", photo);
   }

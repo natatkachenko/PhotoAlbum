@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using PhotoAlbum.BLL.DTO;
 using PhotoAlbum.BLL.Interfaces;
+using PhotoAlbum.BLL.Validation;
 using PhotoAlbum.DAL.Entities;
+using PhotoAlbum.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,18 +14,25 @@ namespace PhotoAlbum.BLL.Services
     public class AuthenticationService : IAuthenticationService
     {
         readonly UserManager<User> _userManager;
+        readonly RoleManager<IdentityRole> _roleManager;
         readonly IMapper mapper;
+        IUnitOfWork Database { get; set; }
 
-        public AuthenticationService(UserManager<User> userManager, IMapper map)
+        public AuthenticationService(UserManager<User> userManager, IMapper map, IUnitOfWork unit, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             mapper = map;
+            Database = unit;
+            _roleManager = roleManager;
         }
 
-        public void AddToRole(User entity, string role)
+        public IdentityRole FindRole(string role)
         {
             if (role == "RegisteredUser")
-                _userManager.AddToRoleAsync(entity, "RegisteredUser");
+            {
+                return _roleManager.FindByNameAsync(role).Result;
+            }
+            return null;
         }
 
         public bool CheckPassword(User entity, string password)
@@ -42,7 +51,13 @@ namespace PhotoAlbum.BLL.Services
             var result = _userManager.CreateAsync(user, userToRegisterDTO.Password).Result;
 
             if (result.Succeeded)
-                AddToRole(user, "RegisteredUser");
+            {
+                var role = FindRole("RegisteredUser");
+                if (role != null)
+                    _userManager.AddToRoleAsync(user, role.Name).Wait();
+                else
+                    throw new PhotoAlbumException($"{nameof(role)} cannot be null or empty!", nameof(role));
+            }  
 
             return result;
         }
