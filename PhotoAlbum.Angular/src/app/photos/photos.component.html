@@ -1,8 +1,8 @@
 <div *ngFor="let photo of photos; let i = index">
     <p><img [src]="createImagePath(photo.imagePath)" alt="user image"></p>
     <p>{{ photo.title }}</p>
-    <p>{{ photo.date}}</p>
+    <p>{{ photo.date }}</p>
     <p>{{ photo.userName}}</p>
     <p>{{ photo.rate }}</p>
-    <button (click)="increasePhotoRate(i)">Like</button>
+    <button *ngIf="isUserAuthenticated" (click)="increasePhotoRate(i)">Like</button>
 </div>

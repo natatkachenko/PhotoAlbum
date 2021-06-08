@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Photo } from '../models/photo';
 import { PhotoToUpdate } from '../models/photo-to-update';
+import { AuthenticationService } from '../services/authentication.service';
 import { EnvironmentUrlService } from '../services/environment-url.service';
 import { PhotoService } from '../services/photo.service';
 
@@ -12,11 +13,16 @@ import { PhotoService } from '../services/photo.service';
 export class PhotosComponent implements OnInit {
   public photos: Photo[];
   public photoToUpdate: PhotoToUpdate;
+  public isUserAuthenticated: boolean;
 
-  constructor(private photoService: PhotoService, private envUrl: EnvironmentUrlService) {}
+  constructor(private photoService: PhotoService, private envUrl: EnvironmentUrlService, private _authService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.getPhotosDetails();
+    this._authService.authChanged
+    .subscribe(res => {
+      this.isUserAuthenticated = res;
+    })
   }
 
   getPhotosDetails() {
