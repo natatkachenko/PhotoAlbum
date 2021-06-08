@@ -13,16 +13,11 @@ import { PhotoService } from '../services/photo.service';
 export class PhotosComponent implements OnInit {
   public photos: Photo[];
   public photoToUpdate: PhotoToUpdate;
-  public isUserAuthenticated: boolean;
 
   constructor(private photoService: PhotoService, private envUrl: EnvironmentUrlService, private _authService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.getPhotosDetails();
-    this._authService.authChanged
-    .subscribe(res => {
-      this.isUserAuthenticated = res;
-    })
   }
 
   getPhotosDetails() {

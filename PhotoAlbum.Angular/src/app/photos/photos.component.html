@@ -1,8 +1,11 @@
-<div *ngFor="let photo of photos; let i = index">
-    <p><img [src]="createImagePath(photo.imagePath)" alt="user image"></p>
-    <p>{{ photo.title }}</p>
-    <p>{{ photo.date }}</p>
-    <p>{{ photo.userName}}</p>
-    <p>{{ photo.rate }}</p>
-    <button *ngIf="isUserAuthenticated" (click)="increasePhotoRate(i)">Like</button>
+<div class="container">
+    <div *ngFor="let photo of photos; let i = index">
+        <p><img [src]="createImagePath(photo.imagePath)" alt="user image"></p>
+        <p>{{ photo.title }}</p>
+        <p>{{ photo.date }}</p>
+        <p>{{ photo.userName}}</p>
+        <p>{{ photo.rate }}</p>
+        <button type="button" class="btn btn-primary btn-sm" (click)="increasePhotoRate(i)">Like</button>
+    </div>
 </div>
+

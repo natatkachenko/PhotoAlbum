@@ -28,8 +28,6 @@
 </div>
 
 <div *ngIf="!isCreate && !isUpdate">
-    <div class="row">
         <button type="button" class="btn btn-primary" (click)="goToCreate()">Add photo</button>
-    </div>
     <app-photos-item *ngFor="let photo of photos; let i = index" [item]="photo" (update)="getPhotoDetailsByIndex(i)" (delete)="deletePhoto(i)"></app-photos-item>
 </div>
