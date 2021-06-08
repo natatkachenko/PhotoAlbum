@@ -1,3 +1,6 @@
-<div>
-    <app-photos></app-photos>
+<div *ngFor="let photo of photos">
+    <p><img [src]="createImagePath(photo.imagePath)" alt="user image"></p>
+    <p>{{ photo.title }}</p>
+    <p>{{ photo.date}}</p>
+    <p>{{ photo.rate }}</p>
 </div>
