@@ -15,6 +15,7 @@ import { LoginUserComponent } from './login-user/login-user.component';
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthGuard } from './guards/auth.guard';
 import { MyPhotosComponent } from './my-photos/my-photos.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -30,7 +31,8 @@ export function tokenGetter() {
     MenuComponent,
     NotFoundComponent,
     LoginUserComponent,
-    MyPhotosComponent
+    MyPhotosComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ export function tokenGetter() {
       {path: 'register', component: RegisterUserComponent},
       {path: 'login', component: LoginUserComponent},
       {path: 'myphotos', component: MyPhotosComponent},
+      {path: 'usermanagement', component: UserManagementComponent, canActivate: [AuthGuard]},
       {path: '404', component: NotFoundComponent},
       {path: '', redirectTo: '/api', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}

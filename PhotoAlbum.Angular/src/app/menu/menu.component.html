@@ -15,7 +15,9 @@
               <li class="nav-item">
                 <a class="nav-link"[routerLink]="['/register']" routerLinkActive="active">Register</a>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/usermanagement']" routerLinkActive="active">User Management</a>
+              </li>
             </ul>
             <ul *ngIf='isUserAuthenticated' class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item">
