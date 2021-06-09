@@ -101,6 +101,10 @@ namespace PhotoAlbum.WEB.Controllers
             }
         }
 
+        /// <summary>
+        /// Sends photos of the current user.
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpGet("MyPhotos")]
         public ActionResult<IEnumerable<PhotoDTO>> GetUserPhotos()
