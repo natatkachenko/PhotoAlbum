@@ -22,7 +22,6 @@ namespace PhotoAlbum.WEB.Controllers
             userService = _userService;
         }
 
-        // GET: api/photos
         [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<PhotoDTO>> GetAll ()
@@ -31,7 +30,6 @@ namespace PhotoAlbum.WEB.Controllers
             return Ok(photos);
         }
 
-        // GET api/photos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PhotoDTO>> GetById(int id)
         {
@@ -46,7 +44,6 @@ namespace PhotoAlbum.WEB.Controllers
             }
         }
 
-        // POST api/photos
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<PhotoDTO>> Add([FromBody] PhotoDTO model)
@@ -67,7 +64,6 @@ namespace PhotoAlbum.WEB.Controllers
             }
         }
 
-        // PUT api/photos
         [Authorize]
         [HttpPut]
         public async Task<ActionResult<PhotoDTO>> Update(PhotoDTO model)
@@ -88,7 +84,6 @@ namespace PhotoAlbum.WEB.Controllers
             }
         }
 
-        // DELETE api/photos/5
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<PhotoDTO>> Delete(int id)

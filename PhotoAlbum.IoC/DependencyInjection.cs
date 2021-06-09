@@ -18,6 +18,10 @@ using System.Text;
 
 namespace PhotoAlbum.IoC
 {
+    /// <summary>
+    /// Provides WebAPI with dependencies of the PhotoContext, repositories, services of the DAL and BLL, Automapper,
+    /// ASP.Net Core Identity and JWT.
+    /// </summary>
     public class DependencyInjection
     {
         readonly IConfiguration conf;

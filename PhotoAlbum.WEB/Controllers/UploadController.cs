@@ -20,7 +20,7 @@ namespace PhotoAlbum.WEB.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [HttpPost]
+        [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> Upload()
         {
             try
