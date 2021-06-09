@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PhotoAlbum.DAL.EFContext;
 using PhotoAlbum.DAL.Entities;
 using PhotoAlbum.DAL.Interfaces;

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PhotoAlbum.BLL;
-using PhotoAlbum.BLL.DTO;
 using PhotoAlbum.BLL.Interfaces;
 using PhotoAlbum.BLL.Services;
 using PhotoAlbum.DAL.EFContext;

@@ -4,7 +4,6 @@ using PhotoAlbum.BLL.DTO;
 using PhotoAlbum.BLL.Interfaces;
 using PhotoAlbum.BLL.Validation;
 using PhotoAlbum.DAL.Entities;
-using PhotoAlbum.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,13 +15,11 @@ namespace PhotoAlbum.BLL.Services
         readonly UserManager<User> _userManager;
         readonly RoleManager<IdentityRole> _roleManager;
         readonly IMapper mapper;
-        IUnitOfWork Database { get; set; }
 
-        public AuthenticationService(UserManager<User> userManager, IMapper map, IUnitOfWork unit, RoleManager<IdentityRole> roleManager)
+        public AuthenticationService(UserManager<User> userManager, IMapper map, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             mapper = map;
-            Database = unit;
             _roleManager = roleManager;
         }
 

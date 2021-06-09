@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using PhotoAlbum.BLL.DTO;
 using PhotoAlbum.BLL.Interfaces;
 using PhotoAlbum.BLL.Validation;
@@ -18,15 +16,11 @@ namespace PhotoAlbum.BLL.Services
     {
         IUnitOfWork Database { get; set; }
         readonly IMapper mapper;
-        UserManager<User> UserManager { get; set; }
-        SignInManager<User> SignInManager { get; set; }
 
-        public UserService(IUnitOfWork unitOfWork, IMapper map, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserService(IUnitOfWork unitOfWork, IMapper map)
         {
             Database = unitOfWork;
             mapper = map;
-            UserManager = userManager;
-            SignInManager = signInManager;
         }
 
         public Task DeleteByIdAsync(string id)
@@ -54,11 +48,6 @@ namespace PhotoAlbum.BLL.Services
             else
                 throw new PhotoAlbumException($"{nameof(id)} cannot be null or empty!", nameof(id));
         }
-
-        //public bool isExist(UserToRegisterDTO dto)
-        //{
-        //    return SignInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false).Result.Succeeded;
-        //}
 
         public Task UpdateAsync(UserDTO dto)
         {
