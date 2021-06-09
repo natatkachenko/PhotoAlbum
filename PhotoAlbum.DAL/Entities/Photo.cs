@@ -13,7 +13,13 @@ namespace PhotoAlbum.DAL.Entities
         public DateTime Date { get; set; } = DateTime.Now;
         public int Rate { get; set; }
         public string UserId { get; set; }
+        /// <summary>
+        /// Stores the path to the image.
+        /// </summary>
         public string ImagePath { get; set; }
+        /// <summary>
+        /// Stores the state of the entity instance (deleted or not).
+        /// </summary>
         public bool isDeleted { get; set; } = false;
 
         [ForeignKey("UserId")]

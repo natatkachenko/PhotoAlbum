@@ -9,8 +9,17 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.DAL.EFContext
 {
+    /// <summary>
+    /// Contains a method for initializing database with the roles and Administrator credentials.
+    /// </summary>
     public class AdminAndRolesInitializer
     {
+        /// <summary>
+        /// Initializes database with the roles and Administrator credentials.
+        /// </summary>
+        /// <param name="provider">A ServiceProvider parameter.</param>
+        /// <param name="configuration">A Configuration parameter.</param>
+        /// <returns></returns>
         public static async Task InitializeAdminAndRoles(IServiceProvider provider, IConfiguration configuration)
         {
             var userManager = provider.GetRequiredService<UserManager<User>>();
