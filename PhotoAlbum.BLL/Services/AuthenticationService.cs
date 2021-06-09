@@ -10,6 +10,7 @@ using System.Text;
 
 namespace PhotoAlbum.BLL.Services
 {
+    /// <inheritdoc/>
     public class AuthenticationService : IAuthenticationService
     {
         readonly UserManager<User> _userManager;

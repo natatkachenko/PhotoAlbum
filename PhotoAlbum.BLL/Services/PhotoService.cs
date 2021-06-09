@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.BLL.Services
 {
+    /// <inheritdoc/>
     public class PhotoService : IPhotoService
     {
         IUnitOfWork Database { get; set; }

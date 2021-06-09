@@ -11,6 +11,7 @@ using System.Text;
 
 namespace PhotoAlbum.BLL.Services
 {
+    /// <inheritdoc/>
     public class JWTService : IJWTService
     {
         readonly IConfigurationSection jwtSettings;
