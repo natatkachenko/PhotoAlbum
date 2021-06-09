@@ -4,39 +4,40 @@ import { Observable } from 'rxjs';
 import { Photo } from '../models/photo';
 import { PhotoToCreate } from '../models/photo-to-create';
 import { PhotoToUpdate } from '../models/photo-to-update';
+import { EnvironmentUrlService } from './environment-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoService {
-  baseUrl = "https://localhost:44356/api/";
+  //baseUrl = "https://localhost:44356/api/";
   headers: HttpHeaders;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private envUrl: EnvironmentUrlService) {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }
 
   getPhotosDetails(): Observable<Photo[]> {
-    return this.http.get<Photo[]>(this.baseUrl + "photos");
+    return this.http.get<Photo[]>(this.envUrl.urlAddress + "/api/photos");
   }
 
   getPhotosDetailsById(id: number) {
-    return this.http.get<Photo>(this.baseUrl + "photos/" + id);
+    return this.http.get<Photo>(this.envUrl.urlAddress + "/api/photos/" + id);
   }
 
   postPhotoDetails(photo: PhotoToCreate) {
-    return this.http.post(this.baseUrl + "photos", photo);
+    return this.http.post(this.envUrl.urlAddress + "/api/photos", photo);
   }
 
   putPhotoDetails(photo: PhotoToUpdate) {
-    return this.http.put(this.baseUrl + "photos", photo);
+    return this.http.put(this.envUrl.urlAddress + "/api/photos", photo);
   }
 
   deletePhoto(id: number) {
-    return this.http.delete(this.baseUrl + "photos/" + id, {headers: this.headers });
+    return this.http.delete(this.envUrl.urlAddress + "/api/photos/" + id, {headers: this.headers });
   }
 
   getUserPhotos(): Observable<Photo[]> {
-    return this.http.get<Photo[]>(this.baseUrl + "photos/" + "myphotos");
+    return this.http.get<Photo[]>(this.envUrl.urlAddress + "/api/photos/" + "myphotos");
   }
 }
