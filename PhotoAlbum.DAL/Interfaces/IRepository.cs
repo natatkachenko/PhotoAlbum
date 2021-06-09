@@ -9,7 +9,7 @@ namespace PhotoAlbum.DAL.Interfaces
     /// <summary>
     /// Contains methods for providing CRUD operations.
     /// </summary>
-    /// <typeparam name="T">A class of the database entity type</typeparam>
+    /// <typeparam name="T">A class of the database entity type.</typeparam>
     public interface IRepository<T> where T : class
     {
         IQueryable<T> GetAll();

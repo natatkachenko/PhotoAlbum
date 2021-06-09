@@ -7,6 +7,9 @@ using System.Text;
 
 namespace PhotoAlbum.BLL.Interfaces
 {
+    /// <summary>
+    /// Contains methods for providing user authentication and authorization.
+    /// </summary>
     public interface IAuthenticationService
     {
         IdentityResult RegisterUser(UserToRegisterDTO userToRegisterDTO);

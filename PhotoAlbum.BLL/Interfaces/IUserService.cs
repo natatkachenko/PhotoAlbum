@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.BLL.Interfaces
 {
+    /// <summary>
+    /// Contains methods specific for the UserDTO.
+    /// </summary>
     public interface IUserService
     {
         IEnumerable<UserDTO> GetAll();

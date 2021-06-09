@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.BLL.Interfaces
 {
+    /// <summary>
+    /// Contains methods for providing CRUD operations.
+    /// </summary>
+    /// <typeparam name="T">A DTO type.</typeparam>
     public interface IService<T> where T : class
     {
         IEnumerable<T> GetAll();

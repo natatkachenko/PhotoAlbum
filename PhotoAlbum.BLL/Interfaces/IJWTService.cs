@@ -8,6 +8,9 @@ using System.Text;
 
 namespace PhotoAlbum.BLL.Interfaces
 {
+    /// <summary>
+    /// Contains methods for providing the JWT token generation.
+    /// </summary>
     public interface IJWTService
     {
         SigningCredentials GetSigningCredentials();
