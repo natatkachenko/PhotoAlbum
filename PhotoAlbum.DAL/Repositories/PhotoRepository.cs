@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.DAL.Repositories
 {
+    /// <inheritdoc/>
     public class PhotoRepository : IPhotoRepository
     {
         readonly PhotoContext db;

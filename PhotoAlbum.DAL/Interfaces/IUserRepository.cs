@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PhotoAlbum.DAL.Interfaces
 {
+    /// <summary>
+    /// Contains methods specific for the User entity.
+    /// </summary>
     public interface IUserRepository
     {
         IQueryable<User> GetAll();
